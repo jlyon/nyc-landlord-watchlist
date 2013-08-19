@@ -1,0 +1,76 @@
+@media screen and (min-width:620px)
+  .no-desktop
+    display: none
+
+  html
+    font-family: "desktop"
+
+    body:after
+      content: "desktop"
+      display: none
+
+  html,
+  body,
+  .row-fluid
+    height: 100%
+    overflow: hidden
+
+  .main-content
+    position: fixed
+    height: 100%
+    right: 0
+    left: 0
+    +transition(all, $trans-time)
+    overflow: hidden
+
+    #map
+      height: 100%
+
+  .left-sidebar #results,
+  .right-sidebar
+    height: 100%
+    overflow-x: hidden
+    overflow-y: auto
+
+  .left-sidebar
+    width: 0
+    +transition(all, $trans-time)
+    position: absolute
+    left: -$left-sidebar-width
+    width: $left-sidebar-width
+    background-color: $white
+    border-right: $border-width solid $grey
+    height: 100%
+
+  .right-sidebar
+    +transition(all, $trans-time)
+    right: -$right-sidebar-width
+    width: $right-sidebar-width
+    position: fixed
+    background-color: $white
+
+
+  .left-sidebar-active
+
+    .main-content
+      left: $left-sidebar-width
+
+        //.leaflet-left,
+        //.leaflet-top.leaflet-center
+        //  padding-left: $left-sidebar-width/2
+
+    .left-sidebar
+      left: 0
+
+
+  .right-sidebar-active
+
+    .main-content
+      right: $right-sidebar-width
+
+      #map
+        border-right: $border-width solid $grey
+
+    .right-sidebar
+      right: 0
+

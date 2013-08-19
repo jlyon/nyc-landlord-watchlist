@@ -1,0 +1,243 @@
+@media screen and (max-width:599px)
+
+  .no-mobile
+    display: none
+
+  html
+    font-family: "mobile"
+    max-width: 100%
+    overflow-x: hidden
+    width: 100%
+
+    body:after
+      content: "mobile"
+      display: none
+
+  button
+    cursor: pointer !important
+
+  html,
+  body,
+  .row-fluid,
+  .main-content
+    height: 100%
+    padding: 0
+
+  body
+    > .row-fluid
+      position: relative
+      //overflow-x: hidden
+      width: 100%
+      height: 100%
+      +transition(all, $trans-time)
+
+    &.right-sidebar-active
+      > .row-fluid
+        right: 280px
+
+
+  .navbar .nav,
+  #showFilters span
+    display: none
+
+  .navbar
+    margin-left: 0
+    margin-right: 0
+    max-width: 100%
+
+    .container-fluid
+      padding: 0
+
+    .brand img
+      max-width: 140px
+      margin-top: 4px
+      height: auto
+      margin-left: 10px
+
+    .links
+      margin-right: 10px
+
+      i
+        margin-right: 0
+
+      #showLocate
+        margin-right: 15px
+
+  // form inputs
+  select,
+  textarea,
+  input[type="text"],
+  input[type="password"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="color"],
+  .uneditable-input
+    +box()
+    max-width: 100%
+    min-height: 30px
+    width: 100%
+
+  .main-content
+    top: $topnav-height
+    position: absolute
+    width: 100%
+    left: 0
+    //+transition(all, $trans-time)
+
+    #map
+      width: 100%
+      height: 100%
+
+    .leaflet-top.leaflet-center
+      +box()
+      margin: 0px
+      padding-left: 60px
+      padding-right: 10px
+      width: 100%
+      display: none
+
+      .locate-active &
+        display: block
+
+      .leaflet-control-geosearch
+        +box()
+        position: relative
+        margin-right: 0
+        padding-right: 48px
+        width: 100%
+
+        input
+
+          max-width: 100%
+          width: 100%
+          margin-right: 0
+          float: left
+
+      #leaflet-control-geosearch-submit
+        position: absolute
+        top: 0
+        right: 0
+
+      .leaflet-control-locate
+        width: 100%
+
+
+  .left-sidebar
+    position: relative
+    top: 100%
+    z-index: 100
+    background-color: $white
+    //+transition(all, $trans-time)
+
+    #results
+      padding-bottom: 4em
+
+      .pagination
+        margin: .5em 0 0 0
+
+        &:first-child
+          & + .item
+            padding-top: 0
+
+          ul
+            display: none
+
+  .right-sidebar
+    left: -280px
+    top: $topnav-height
+    position: absolute
+    width: 280px
+    //+transition(all, $trans-time)
+
+  .left-sidebar-active
+
+    .left-sidebar
+      top: 70%
+
+    .main-content
+      height: 70%
+
+
+  .left-sidebar-big
+
+    .left-sidebar
+      top: 50%
+
+    .main-content
+      height: 50%
+
+
+  .right-sidebar-active
+
+    .main-content,
+    .left-sidebar
+<<<<<<< HEAD
+      left: 280px
+
+    .right-sidebar
+      left: 0
+=======
+      //left: -280px
+
+    .right-sidebar
+      //right: 0
+>>>>>>> 86150bf9b35eb418e5fb63bc46e01e0e6de84d61
+
+
+  .overlay-active
+
+    .main-content
+      height: auto
+
+    #map
+      display: none
+
+    #about
+      padding: 1em 2em
+      height: auto
+
+      h2
+        font-size: 24px
+
+      .summary .logos
+        margin: 0 -1em
+
+        li
+          margin-right: 5px
+          +logos($sponsor-logos-mobile-scale)
+          width: 45%
+
+          a
+            margin: 0 auto
+
+      .supported
+        text-align: center
+        font-style: italic
+        padding-top: 2em
+
+      .leaflet-top.leaflet-center
+        margin-left: 0
+        top: 9em
+        display: block
+        position: absolute
+        width: auto
+        left: 2em
+        right: 2em
+        padding-left: 0
+        padding-right: 0
+
+    #showLocate,
+    #mapOverlay,
+    .left-sidebar
+      display: none
+
+
