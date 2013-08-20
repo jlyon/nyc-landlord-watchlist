@@ -163,12 +163,12 @@ update 2013_buildings set BOROUGH = "Queens" where BORO=4;
 update 2013_buildings set BOROUGH = "Staten Island" where BORO=5;
 update 2013_buildings set FULL_ADDRESS = CONCAT(PHN, " ", STR_NM, ", ", BOROUGH, ", NY ", ZIP);
 
-update 2013_buildings b set a = (select count(*) from 2013_FOILVIOL v where v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="A");
-update 2013_buildings b set b = (select count(*) from 2013_FOILVIOL v where v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="B");
-update 2013_buildings b set c = (select count(*) from 2013_FOILVIOL v where v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="C");
-update 2013_buildings b set i = (select count(*) from 2013_FOILVIOL v where v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="I");
+update 2013_buildings b set a = (select count(*) from 2013_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="A");
+update 2013_buildings b set b = (select count(*) from 2013_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="B");
+update 2013_buildings b set c = (select count(*) from 2013_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="C");
+update 2013_buildings b set i = (select count(*) from 2013_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="I");
 
-update 2013_buildings b set num = (select count(*) from 2013_FOILVIOL v where v.BLDG_ID=b.BLDG_ID);
+update 2013_buildings b set num = (select count(*) from 2013_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID);
 
 
 
@@ -509,15 +509,20 @@ select
   CONCAT(l.OWNER1_FN, " ", l.OWNER1_LN)
 from 2013_buildings_watchlist l
 left join 2013_buildings_watchlist_addresses a on a.BLDG_ID = l.BLDG_ID
-group by STR_NM, OWNER1_LN, OWNER1_FN;
+group by l.BLDG_ID;
 
+update 2013_buildings_watchlist_final a set borough = (select BORODESC from 2013_buildings_raw b where b.bldg_id = a.bldg_id limit 1);
 
 # Export buildings, landlords as JSON from phpMyAdmin
 
 # Clean up buldings.json file
-#sed "s/\\\'/\'/g" buildings_orig.json >buildings1.json
-#sed "s/\ \ \ \ \ \ \ \ //g" buildings1.json >buildings2.json
-#sed "s/\"\ /\"/g" buildings2.json >buildings3.json
-#mv buildings3.json buildings.json
+#
+sed "s/\\\'/\'/g" buildings_orig.json >buildings1.json
+#
+sed "s/\ \ \ \ \ \ \ \ //g" buildings1.json >buildings2.json
+#
+sed "s/\"\ /\"/g" buildings2.json >buildings3.json
+#
+mv buildings3.json buildings.json
 
 

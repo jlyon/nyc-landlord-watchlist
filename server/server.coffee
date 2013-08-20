@@ -2,7 +2,14 @@
 
 #Buildings = new Meteor.Collection('buildings')
 Meteor.publish 'buildings', -> 
-  return Buildings.find({}, {limit: 25})
+  Buildings.find {lat: {$ne: 0}}, 
+    limit: 500
+    sort:
+      num: -1
+
+Meteor.publish 'building', ->
+  if id = Session.get("activeBuilding")
+    Buildings.find {id: id}
 
 ###
 ({},
@@ -14,9 +21,8 @@ Meteor.publish 'buildings', ->
 ###
 # landlord collection
 #Landlords = new Meteor.Collection('landlords')
-console.log '%%'
 Meteor.publish 'landlords', ->
-  return Landlords.find()
+  Landlords.find()
 
 # Load in data
 #if Markers.find.count() is 0
