@@ -41,7 +41,7 @@ insertJSONfile = (file, insert, Coll) ->
   #console.log(data)
   #throw err  if err
   if data
-    console.log(got it)
+    #console.log(got it)
     jsondata = JSON.parse(data)
   #console.log(data)
   insert jsondata, Coll
