@@ -5,10 +5,9 @@ Template.header.helpers(
 
 Template.header.events(
   'click a': (e) ->
-    Session.set('activeBorough', this._id)
+    Session.set('activeBorough', this.link)
+    console.log Session.get "activeBorough"
 )
-
-
 
 Template.boroughs.helpers(
   #Session.activeBorough null
@@ -32,14 +31,11 @@ Template.boroughs.helpers(
       label: "Staten Island"
       link: "Staten Island"
     ]
-    ###_.each boroughs, (item, index) ->
-       boroughs[index].active = 'active'
-    console.log boroughs
-    ###
-    boroughs
+)
 
+Template.borough.helpers(
   active: ->
-    console.log 'a'
-    if Session.get "activeBorough" is this.link then return 'active'
+    current = Session.get "activeBorough"
+    if current is this.link then return 'active'
     return ''
 )

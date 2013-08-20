@@ -53,11 +53,14 @@
 <template name="boroughs">
   <ul class="nav nav-pills" id="borough-tabs">
   {{#each boroughs}}
-    <li><a href="#{{link}}" class="{{active}}">{{label}}</a></li>
+    {{>borough}}
   {{/each}}
   </ul>
 </template>
 
+<template name="borough">
+  <li><a href="#{{this.link}}" class="{{active}}">{{this.label}}</a></li>
+</template>
 
 <template name="popup">
   <div class="popupWrapper">

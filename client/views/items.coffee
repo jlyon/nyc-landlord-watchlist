@@ -4,7 +4,16 @@ Template.buildingListItem.helpers(
 )
 
 Template.buildingListItem.events(
-  'click a': (e) ->
+  'click .title': (e) ->
     alert('adsf')
     Session.set('activeBuilding', this._id)
+
+  'click .share-story': (e) ->
+  	#render item template
+    fragment = Meteor.render -> 
+      #this calls the template and returns the HTML.
+      Template['storySubmit'](this)
+      
+    # append
+    $('body').append(fragment)
 )

@@ -1,6 +1,7 @@
 {
   "packages": {
     "leaflet": {},
-    "npm": {}
+    "npm": {},
+    "roles": {}
   }
 }
