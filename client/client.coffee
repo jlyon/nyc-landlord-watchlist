@@ -1,12 +1,13 @@
 # create marker collection
 
-buildingsHandle = Meteor.subscribe 'buildings'
-landlordsHandle = Meteor.subscribe 'landlords'
+Buildings = Meteor.subscribe 'buildings'
+Landlords = Meteor.subscribe 'landlords'
 
 isReady = ->
-  return buildingsHandle && buildingsHandle.ready() && landlordsHandle && landlordsHandle.ready()
+  return Buildings && Buildings.ready() && Landlords && Landlords.ready()
 
 # resize the layout
+###
 window.resize = (t) ->
   w = window.innerWidth
   h = window.innerHeight
@@ -15,21 +16,25 @@ window.resize = (t) ->
   m = (h-top) - 65 
   t.find('#container').style.width = "#{c}px"
   t.find('#map').style.height = "#{m}px"
+###
 
 Template.map.collectionsLoaded = -> 
   return isReady
 
 Template.map.rendered = ->
   if isReady
+    console.log Buildings.findOne()
     # resize on load
-    window.resize(@)
+    #window.resize(@)
 
     # resize on resize of window
+    ###
     $(window).resize =>
       window.resize(@)
+    ###
 
     # create default image path
-    L.Icon.Default.imagePath = 'packages/leaflet/images'
+    #L.Icon.Default.imagePath = 'packages/leaflet/images'
 
     # create a map in the map div, set the view to a given place and zoom
     window.map = L.map 'map', 
@@ -37,7 +42,7 @@ Template.map.rendered = ->
     .setView([49.25044, -123.137], 13)
 
     # add a CloudMade tile layer with style #997 - use your own cloudmade api key
-    L.tileLayer "http://{s}.tile.cloudmade.com/#{window.cloudmade}/997/256/{z}/{x}/{y}.png", 
+    L.tileLayer "http://a.tiles.mapbox.com/v3/albatrossdigital.map-i5m0mag7/{z}/{x}/{y}.png", 
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
     .addTo(window.map)
     

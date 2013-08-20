@@ -14,7 +14,6 @@ Meteor.publish 'buildings', ->
 ###
 # landlord collection
 #Landlords = new Meteor.Collection('landlords')
-console.log '%%'
 Meteor.publish 'landlords', ->
   return Landlords.find()
 
