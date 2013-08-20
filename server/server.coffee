@@ -1,6 +1,6 @@
 # marker collection
 
-@Buildings = new Meteor.Collection('buildings')
+#Buildings = new Meteor.Collection('buildings')
 Meteor.publish 'buildings', -> 
   return Buildings.find({}, {limit: 25})
 
@@ -13,12 +13,10 @@ Meteor.publish 'buildings', ->
 )
 ###
 # landlord collection
-@Landlords = new Meteor.Collection('landlords')
+#Landlords = new Meteor.Collection('landlords')
 console.log '%%'
-console.log Landlords.findOne()
 Meteor.publish 'landlords', ->
   return Landlords.find()
-
 
 # Load in data
 #if Markers.find.count() is 0
