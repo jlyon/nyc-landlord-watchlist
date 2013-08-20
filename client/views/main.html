@@ -1,0 +1,81 @@
+<head>
+  <title>Meteor Leaflet Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    {{>header}}
+  </div>
+
+  <div class="row-fluid">
+
+    <div class="left-sidebar">
+      <div class="" id="results"></div>
+    </div>
+
+    <div class="main-content" id="main">
+      {{> map}}
+    </div>
+
+    <div class="right-sidebar">
+      <div class="" id="filters">
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+
+<template name="header">
+ <h1 class="pull-left"><img src="images/logo.png" width="325" height="60" alt="NYCHA Watchlist - Tracking repairs in New York City public housing" ></h1>
+  
+  <button class="btn" id="show-menu"><span class="icon-reorder"></span></button>
+
+  <div class="menu">
+    <ul class="outside-links nav nav-pills"><li><a href="/landlord-watchlist" title="">Home</a></li>
+      <li><a href="http://advocate.nyc.gov/landlord-watchlist/criteria" title="">Criteria &amp; Submissions</a></li>
+      <li><a href="http://advocate.nyc.gov/landlord-watchlist/tenant-rights" title="">Tenants' Rights</a></li>
+      <li><a href="http://advocate.nyc.gov/landlord-watchlist/landlord-resources" title="">Landlord Resources</a></li>
+      <li><a href="http://advocate.nyc.gov/buildingsinprogress" title="">Removed Bldgs</a></li>
+      <li><a href="http://advocate.nyc.gov/landlord-watchlist/rehab-list" title="">In Rehab</a></li>
+      <li><a href="http://advocate.nyc.gov/landlord-watchlist/spanish" title="">En español</a></li>
+      <li><a href="http://advocate.nyc.gov/landlord-watchlist/chinese" title=""> 中文</a></li>
+    </ul>
+
+    <h5 class="borough-tabs-title">View buildings by borough</h5>
+    {{>boroughs}}
+</template>
+
+
+<template name="boroughs">
+  <ul class="nav nav-pills" id="borough-tabs">
+  {{#each boroughs}}
+    <li><a href="#{{link}}">{{label}}</a></li>
+  {{/each}}
+  </ul>
+</template>
+
+
+<template name="popup">
+  <div class="popupWrapper">
+    <div class="item addressWrapper">
+      <div class="ranking pull-right"><span>#</span>{{rank}}</div>
+      <h2>{{street_address}}, <span>{{borough}}</span></h2>
+      <div>{{org}}</div>
+      <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
+      <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
+    </div>
+    <div class="imageWrapper pull-left">
+      <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
+    </div>
+    <div class="item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
+  </div>
+</template>
+
+
+
+
+  
