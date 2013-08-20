@@ -9,3 +9,6 @@ coffeescript
 leaflet
 jquery
 madewith
+underscore
+standard-app-packages
+npm

@@ -24,25 +24,24 @@ Meteor.publish 'landlords', Landlords.find()
 Meteor.startup ->
   insertSample = (jsondata, Coll) ->
     _.each jsondata, (data) ->
-      Fiber(->
-        Coll.insert data
-      ).run()
+      Coll.insert data
 
   if Landlords.find().count() is 0
-    insertJSONfile("server/data/landlords.json", insertSample, Landlords)
+    insertJSONfile("data/landlords.json", insertSample, Landlords)
   if Buildings.find().count() is 0
-    insertJSONfile("server/data/buildings.json", insertSample, Buildings)
+    insertJSONfile("data/buildings.json", insertSample, Buildings)
 
-  console.log Buildings.findOne()
-
-
-fs = __meteor_bootstrap__.require("fs")
 insertJSONfile = (file, insert, Coll) ->
   jsondata = undefined
-  fs.readFile file, (err, data) ->
-    throw err  if err
+  data = Assets.getText file
+  #console.log(err)
+  #console.log(data)
+  #throw err  if err
+  if data
+    console.log(got it)
     jsondata = JSON.parse(data)
-    insert jsondata, Coll
+  #console.log(data)
+  insert jsondata, Coll
 
 
 
