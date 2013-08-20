@@ -11,8 +11,9 @@ Template.header.events(
 
 
 Template.boroughs.helpers(
+  #Session.activeBorough null
   boroughs: ->
-    return [
+    boroughs = [
       label: "All buildings"
       link: "All buildings"
     ,
@@ -31,4 +32,14 @@ Template.boroughs.helpers(
       label: "Staten Island"
       link: "Staten Island"
     ]
+    ###_.each boroughs, (item, index) ->
+       boroughs[index].active = 'active'
+    console.log boroughs
+    ###
+    boroughs
+
+  active: ->
+    console.log 'a'
+    if Session.get "activeBorough" is this.link then return 'active'
+    return ''
 )

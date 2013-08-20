@@ -19,23 +19,18 @@ Template.map.rendered = ->
       doubleClickZoom: false
     .setView([40.78847003749051, -73.9185905456543], 12)
 
-
     # add a CloudMade tile layer with style #997 - use your own cloudmade api key
     L.tileLayer "http://a.tiles.mapbox.com/v3/albatrossdigital.map-yaq188c8/{z}/{x}/{y}.png", 
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
     .addTo(@map)
 
-    ###icon = new L.icon(
-      iconUrl: 'circle.png'
-      iconSize:   [size, size]
-      iconAnchor:   [size/2, size/2]
-      popupAnchor:  [0, -(size/2 + 5)]
-    )###
     markerLayer = new L.FeatureGroup()
     markerLayer.addTo @map
-    data = Buildings.find().fetch()
     $results = $("#results")
 
+
+    # stop here
+    data = Buildings.find().fetch()
     _.each data, (item, index)->
       size = Math.round(item.num/20) + 5;
       item.rank = index
