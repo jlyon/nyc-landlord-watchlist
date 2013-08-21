@@ -6,8 +6,8 @@ Template.filepicker.rendered = function () {
     },
     {},
     function(InkBlob){
-      console.log(this)
-      console.log(JSON.stringify(InkBlob));
+      console.log(InkBlob)
+      Template.storySubmit.addImages(InkBlob)
     },
     function(FPError){
       console.log(FPError.toString());

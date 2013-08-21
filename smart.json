@@ -3,6 +3,7 @@
     "leaflet": {},
     "npm": {},
     "roles": {},
-    "filepicker": {}
+    "filepicker": {},
+    "router": {}
   }
 }

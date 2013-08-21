@@ -7,6 +7,7 @@ Stories.allow({
 
 Meteor.methods(
   newStory: (storyAttributes) ->
+    console.log(storyAttributes)
     user = Meteor.user();
 
     #pick out the whitelisted keys

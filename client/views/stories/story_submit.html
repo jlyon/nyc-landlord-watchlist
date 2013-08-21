@@ -33,17 +33,24 @@
 
       <div class="tab-pane" id="storyMedia">
         <h4>Media</h4>
-        <div class="well">
-          {{#if media}}
-            {{#each this.media}}
-              <li>yup</li>
-            {{/each}}
-          {{else}}
-            <p>No media added yet, please use the tool below.</p>
-          {{/if}}
+        <div class="well">              
+          <p class="empty-text">No media added yet, please use the tool below.</p> 
         </div>
         {{> filepicker this}}
       </div>
     </div>
   </form>
+</template>
+
+<template name="storySubmitImage">
+  <div class="media-item">
+    <h5>{{ this.filename }}</h5>
+    <p>{{{ content }}}</p>
+    <div class="control-group">
+      <label class="control-label" for="label">Image Label</label>
+      <div class="controls">
+        <textarea name="label" type="text" value="" placeholder="Label"/>
+      </div>
+    </div> 
+  </div>
 </template>
