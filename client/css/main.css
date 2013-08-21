@@ -1,3 +1,11 @@
+/* line 1, ../sass/components/_filepicker.sass */
+#filepicker-media-area {
+  border: 0;
+  min-height: 430px;
+  width: 100%;
+  overflow: hidden;
+}
+
 /* line 3, ../sass/components/_filters.sass */
 #filters .accordion-group,
 #filters .accordion-inner {
@@ -50,8 +58,6 @@
   font-weight: bold;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
   border-radius: 5px;
   border: none;
   line-height: 24px;
@@ -261,8 +267,6 @@
 .leaflet-container .leaflet-popup-content-wrapper {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
   border-radius: 0;
 }
 /* line 53, ../sass/components/_map.sass */
@@ -899,11 +903,8 @@ h2 {
   height: 38px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
   border-radius: 3px;
   background-color: #387cc0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #387cc0), color-stop(100%, #4b89c6));
   background-image: -webkit-linear-gradient(#387cc0, #4b89c6);
   background-image: -moz-linear-gradient(#387cc0, #4b89c6);
   background-image: -o-linear-gradient(#387cc0, #4b89c6);
@@ -950,7 +951,6 @@ h2 {
 .btn-normal.btn-dark,
 .btn-dark.btn-dark,
 #leaflet-control-geosearch-submit.btn-dark {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #1f4066), color-stop(100%, #355375));
   background-image: -webkit-linear-gradient(#1f4066, #355375);
   background-image: -moz-linear-gradient(#1f4066, #355375);
   background-image: -o-linear-gradient(#1f4066, #355375);

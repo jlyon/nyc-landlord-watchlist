@@ -7,6 +7,7 @@
 
   <div class="navbar navbar-fixed-top">
     {{>header}}
+    {{> meteorStatuses}}
   </div>
 
   <div class="row-fluid">
@@ -25,6 +26,7 @@
     </div>
 
   </div>
+  {{> bootstrapPop }}
 
 </body>
 
@@ -76,6 +78,34 @@
     </div>
     <div class="item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
   </div>
+</template>
+
+
+<template name="bootstrapPop">
+  {{#if isAvailable}}
+    {{#with getArgs}}
+      <div class="modal fade" id="{{ modalType }}-modal-{{ this.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">{{ title }}</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            {{#if this.footer }}
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default close-pop" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary submit">{{ submitText }}</button>
+            </div>
+            {{/if}}
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    {{/with}}
+  {{else}}
+    <div class="modal fade"></div>
+  {{/if}}
 </template>
 
 

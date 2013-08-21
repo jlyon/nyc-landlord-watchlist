@@ -2,6 +2,7 @@
   "packages": {
     "leaflet": {},
     "npm": {},
-    "roles": {}
+    "roles": {},
+    "filepicker": {}
   }
 }

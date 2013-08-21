@@ -6,7 +6,7 @@ Stories.allow({
 })
 
 Meteor.methods(
-  newStory: (pageAttributes) ->
+  newStory: (storyAttributes) ->
     user = Meteor.user();
 
     #pick out the whitelisted keys
@@ -14,6 +14,8 @@ Meteor.methods(
       submitted: new Date().getTime(),
       published: false
     })
+
+    storyId = Stories.insert(Story)
 
     return storyId
 

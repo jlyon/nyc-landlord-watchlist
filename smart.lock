@@ -4,7 +4,8 @@
     "basePackages": {
       "leaflet": {},
       "npm": {},
-      "roles": {}
+      "roles": {},
+      "filepicker": {}
     },
     "packages": {
       "leaflet": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/alanning/meteor-roles.git",
         "tag": "v1.0.6",
         "commit": "f81cbf7c765a4ed7e16a580c288db6f10a90856b"
+      },
+      "filepicker": {
+        "git": "https://github.com/Filepicker/meteor.git",
+        "tag": "v0.3.0",
+        "commit": "dcb6f3779e5fc105520ba06b0392e3a79c73a7e6"
       }
     }
   }
