@@ -1,8 +1,9 @@
 <template name="buildingListItem">
   <div class="item {{active}}">
     <div class="pull-right">{{num}} violations</div>
-    <h3><a href="#">{{street_address}}</a></h3>
+    <h3><a class="title" href="#">{{street_address}}</a></h3>
     <div>{{org}}</div>
     <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
+    <div><a href="#" class="share-story btn">Share Your Story</a></div>
   </div>
 </template>

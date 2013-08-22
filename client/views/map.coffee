@@ -50,7 +50,14 @@ Template.map.rendered = ->
       ).bindPopup(Template.popup(item),
         closeButton: true
       ).addTo markerLayer
-      $(Template.buildingListItem(item)).appendTo($results)
+
+      # render item template
+      fragment = Meteor.render -> 
+        #this calls the template and returns the HTML.
+        Template['buildingListItem'](item)
+        
+      # append
+      $results.append(fragment)
 
 
     $("body").addClass "left-sidebar-active"

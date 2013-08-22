@@ -1,0 +1,56 @@
+<template name="storySubmit">
+  <div class="well">
+    <p>You are submitting a story for {{ street_address }}</p>
+  </div>
+  <form class="main">
+    <ul class="nav nav-tabs" id="storyTab">
+      <li class="active"><a href="#storyMain" data-toggle="tab">Main</a></li>
+      <li><a href="#storyMedia" data-toggle="tab">Media</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="storyMain">
+        <div class="control-group">
+          <label class="control-label" for="email">Email</label>
+          <div class="controls">
+            <input name="email" type="email" value="" placeholder="Email"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="message">Message</label>
+          <div class="controls">
+            <textarea name="message" type="text" value=""/>
+          </div>
+        </div> 
+
+        <div class="control-group submit">
+          <div class="controls">
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="storyMedia">
+        <h4>Media</h4>
+        <div class="well">              
+          <p class="empty-text">No media added yet, please use the tool below.</p> 
+        </div>
+        {{> filepicker this}}
+      </div>
+    </div>
+  </form>
+</template>
+
+<template name="storySubmitImage">
+  <div class="media-item">
+    <h5>{{ this.filename }}</h5>
+    <p>{{{ content }}}</p>
+    <div class="control-group">
+      <label class="control-label" for="label">Image Label</label>
+      <div class="controls">
+        <textarea name="label" type="text" value="" placeholder="Label"/>
+      </div>
+    </div> 
+  </div>
+</template>

@@ -1,0 +1,10 @@
+{
+    "name": "filepicker",
+    "description": "A smart package that helps make it even easier to use Filepicker to upload/import and save/export content.",
+    "homepage": "https://github.com/Filepicker/meteor",
+    "author": "Liyan Chang",
+    "version": "0.3.0",
+    "git": "https://github.com/Filepicker/meteor.git",
+    "packages": {}
+}
+

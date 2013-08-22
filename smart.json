@@ -1,6 +1,9 @@
 {
   "packages": {
     "leaflet": {},
-    "npm": {}
+    "npm": {},
+    "roles": {},
+    "filepicker": {},
+    "router": {}
   }
 }

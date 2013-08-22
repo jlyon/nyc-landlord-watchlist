@@ -19,20 +19,17 @@ Meteor.publish 'building', ->
     street_address: true
 )
 ###
+
 # landlord collection
-#Landlords = new Meteor.Collection('landlords')
 Meteor.publish 'landlords', ->
   Landlords.find()
-
-# Load in data
-#if Markers.find.count() is 0
-
 
 Meteor.startup ->
   insertSample = (jsondata, Coll) ->
     _.each jsondata, (data) ->
       Coll.insert data
 
+  # Load in data if empty
   if Landlords.find().count() is 0
     insertJSONfile("data/landlords.json", insertSample, Landlords)
   if Buildings.find().count() is 0
@@ -51,4 +48,12 @@ insertJSONfile = (file, insert, Coll) ->
   insert jsondata, Coll
 
 
+# User Stories
 
+Meteor.publish 'stories', ->
+  user = Meteor.user();
+  if Roles.userIsInRole(user._id, ['admin'])
+    Stories.find()
+
+  else
+    Stories.find({ published: true })
