@@ -1,9 +1,11 @@
+###
 Template.header.helpers(
   active: ->
     return Session.get('activeBorough') is this._id
 )
+###
 
-Template.header.events(
+Template.boroughs.events(
   'click a': (e) ->
     Session.set('activeBorough', this._id)
 )

@@ -4,7 +4,7 @@ Template.buildingListItem.helpers(
 )
 
 Template.buildingListItem.events(
-  'click a': (e) ->
+  'click ': (e) ->
     alert('adsf')
     Session.set('activeBuilding', this._id)
 )
