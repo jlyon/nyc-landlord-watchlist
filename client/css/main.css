@@ -251,20 +251,32 @@ h2 {
   border-color: #2b353f #2b353f #364350;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 106, ../sass/components/_map.sass */
+/* line 109, ../sass/components/_map.sass */
 #map .popupWrapper .box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  float: left;
   margin-left: 2%;
+  height: 85px;
+  overflow: hidden;
   width: 32%;
 }
-/* line 110, ../sass/components/_map.sass */
+/* line 118, ../sass/components/_map.sass */
 #map .popupWrapper .box:first-child {
   margin-left: 0;
 }
-/* line 117, ../sass/components/_map.sass */
+/* line 125, ../sass/components/_map.sass */
+#map .popupWrapper .imageWrapper img {
+  height: auto;
+  max-width: 100% !important;
+}
+/* line 129, ../sass/components/_map.sass */
 #map .popupWrapper .daysWrapper {
   border-bottom: none;
 }
-/* line 120, ../sass/components/_map.sass */
+/* line 132, ../sass/components/_map.sass */
 #map .popupWrapper .dataTitle {
   color: #a5a5a5;
   float: left;
@@ -272,13 +284,13 @@ h2 {
   display: block;
   padding-left: 10px;
 }
-/* line 127, ../sass/components/_map.sass */
+/* line 139, ../sass/components/_map.sass */
 #map .popupWrapper .dataValue {
   font-weight: bold;
   font-size: 2em;
   line-height: 1em;
 }
-/* line 132, ../sass/components/_map.sass */
+/* line 144, ../sass/components/_map.sass */
 #map .popupWrapper .dataValue.highlighted {
   color: #fe7e38;
 }

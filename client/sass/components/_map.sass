@@ -103,32 +103,44 @@
     border-color: #2B353F #2B353F #364350
     border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25)
 
-  .popupWrapper .box
-    margin-left: 2%
-    width: 32%
+  .popupWrapper
+    .header
 
-    &:first-child
-      margin-left: 0
+    .box
+      +box-sizing(border-box)
+      display: block
+      float: left
+      margin-left: 2%
+      height: 85px
+      overflow: hidden 
+      width: 32%
 
-  .popupWrapper .imageWrapper 
-    //width: 150px
-    //height: 120px
+      &:first-child
+        margin-left: 0
 
-  .popupWrapper .daysWrapper 
-    border-bottom: none
+    .imageWrapper 
+      //width: 150px
+      //height: 120px
 
-  .popupWrapper .dataTitle 
-    color: #A5A5A5
-    float: left
-    width: 120px
-    display: block
-    padding-left: 10px
+      img
+        height: auto
+        max-width: 100%!important
 
-  .popupWrapper .dataValue 
-    font-weight: bold
-    font-size: 2em
-    line-height: 1em
+    .daysWrapper 
+      border-bottom: none
 
-  .popupWrapper .dataValue.highlighted 
-    color: #FE7E38
+    .dataTitle 
+      color: #A5A5A5
+      float: left
+      width: 120px
+      display: block
+      padding-left: 10px
+
+    .dataValue 
+      font-weight: bold
+      font-size: 2em
+      line-height: 1em
+
+    .dataValue.highlighted 
+      color: #FE7E38
   
