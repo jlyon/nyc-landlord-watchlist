@@ -70,7 +70,6 @@ Template.pager.events(
 
 
 Template.map.rendered = ->
-  console.log window.loaded
   #if not $("body").hasClass "left-sidebar-active"
   #if window.map is `undefined`
   # create a map in the map div, set the view to a given place and zoom
@@ -132,7 +131,7 @@ Template.map.rendered = ->
   }
   j++;
   ###
-  
+
 
 @updateMakers = (data) ->
   borough = Session.get "activeBorough"

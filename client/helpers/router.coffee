@@ -1,16 +1,19 @@
 Meteor.Router.add(
-  # Front
-  '/':
-    to: "landlords"
-    and: ->
-      Session.set "activePage", "landlords"
-  '/buildings'
-    to: "buildings"
-    and: ->
+  '/': ->
+    Session.set "activePage", "landlords"
+    $("body").removeClass "left-sidebar-active"
+    "landlords"
+
+  'buildings': ->
+      alert "asdf"
       Session.set "activePage", "buidlings"
-  '/buildings/:_borough'
-    to: "buildings"
-    and: (borough) ->
-      Session.set "activeBorough", borough
+      console.log "buildings"
+      $("body").addClass "left-sidebar-active"
+      "results"
+
+  '/buildings/:borough': (borough) ->
+      Session.set "activeBorough", borough.replace('_', ' ')
       Session.set "activePage", "buidlings"
+      $("body").addClass "left-sidebar-active"
+      "results"
 )
