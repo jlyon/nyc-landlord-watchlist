@@ -10,6 +10,12 @@ Template.landlords.events(
   'click a': (e) ->
     e.preventDefault()
     Session.set('activeBorough', this._id)
+
+  'mouseover': ->
+    $('#landlord-' + this._id + ' .headshot').css 'background-image', 'url("http://maps.googleapis.com/maps/api/streetview?size=225x170&location=' + this.bldg_address + '&sensor=false")'
+  
+  'mouseout': ->
+    $('#landlord-' + this._id + ' .headshot').css 'background-image', 'url("/images/landlord.jpg")'
 )
 
 

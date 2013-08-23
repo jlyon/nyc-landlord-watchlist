@@ -205,7 +205,7 @@ html.landlords body > .row-fluid {
 }
 /* line 70, ../sass/components/_landlords.sass */
 .landlords .landlord {
-  background-color: white;
+  background-color: #e5e9ed;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -218,7 +218,7 @@ html.landlords body > .row-fluid {
 }
 /* line 83, ../sass/components/_landlords.sass */
 .landlords .landlord:hover {
-  background-color: #f59630;
+  background-color: white;
 }
 /* line 86, ../sass/components/_landlords.sass */
 .landlords .landlord h2 {
