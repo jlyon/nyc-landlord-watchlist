@@ -176,8 +176,9 @@ html.landlords body > .row-fluid {
 .landlords .rs-carousel-action-next,
 .landlords .rs-carousel-action-prev {
   top: 100px;
-  background-color: #f59630;
-  color: #2d3645;
+  background-color: #2d3645;
+  border: 2px solid white;
+  color: white;
   width: 50px;
   height: 50px;
   -webkit-border-radius: 50px;
@@ -188,21 +189,21 @@ html.landlords body > .row-fluid {
   line-height: 50px;
   text-align: center;
 }
-/* line 59, ../sass/components/_landlords.sass */
+/* line 60, ../sass/components/_landlords.sass */
 .landlords .rs-carousel-action-next:hover,
 .landlords .rs-carousel-action-prev:hover {
-  background-color: white;
+  background-color: #f59630;
   text-decoration: none;
 }
-/* line 63, ../sass/components/_landlords.sass */
+/* line 64, ../sass/components/_landlords.sass */
 .landlords .rs-carousel-action-next {
   right: 20px;
 }
-/* line 66, ../sass/components/_landlords.sass */
+/* line 67, ../sass/components/_landlords.sass */
 .landlords .rs-carousel-action-prev {
   left: 20px;
 }
-/* line 69, ../sass/components/_landlords.sass */
+/* line 70, ../sass/components/_landlords.sass */
 .landlords .landlord {
   background-color: white;
   -webkit-border-radius: 4px;
@@ -215,29 +216,37 @@ html.landlords body > .row-fluid {
   cursor: hand;
   font-size: 80%;
 }
-/* line 82, ../sass/components/_landlords.sass */
+/* line 83, ../sass/components/_landlords.sass */
 .landlords .landlord:hover {
   background-color: #f59630;
 }
-/* line 85, ../sass/components/_landlords.sass */
+/* line 86, ../sass/components/_landlords.sass */
 .landlords .landlord h2 {
   margin-top: 20px;
 }
-/* line 88, ../sass/components/_landlords.sass */
+/* line 89, ../sass/components/_landlords.sass */
+.landlords .landlord h5,
+.landlords .landlord h6 {
+  margin: 0;
+}
+/* line 93, ../sass/components/_landlords.sass */
 .landlords .landlord .thumbnail {
   height: 350px;
   width: 225px;
 }
-/* line 92, ../sass/components/_landlords.sass */
+/* line 97, ../sass/components/_landlords.sass */
 .landlords .landlord .thumbnail .headshot {
   width: 225px;
-  height: 150px;
-  background: #333333 url(/images/silhouette.png) center no-repeat;
+  height: 170px;
+  background: #333333 url(/images/landlord.jpg) center no-repeat;
 }
-/* line 97, ../sass/components/_landlords.sass */
+/* line 102, ../sass/components/_landlords.sass */
 .landlords .landlord .thumbnail .headshot .rank {
   padding: 10px;
   color: white;
+  font-size: 4em;
+  font-weight: bold;
+  text-align: right;
 }
 
 /* line 1, ../sass/components/_map.sass */
