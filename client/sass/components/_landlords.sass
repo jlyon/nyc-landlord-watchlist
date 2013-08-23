@@ -1,0 +1,27 @@
+.landlords
+  width: (300px + 40px) * 100
+  height: 500px
+  overflow: auto
+  overflow-y: hidden
+  
+  .landlord
+    background-color: $blue-dark
+    color: $white
+    cursor: pointer
+    cursor: hand
+
+    &:hover
+      background-color: $orange
+
+    .thumbnail
+      width: 310px
+      height: 420px
+
+      .headshot
+        width: 300px
+        height: 200px
+        background: $white url(/images/silhouette.png) center no-repeat
+
+        .rank
+          padding: 10px
+          color: $white
