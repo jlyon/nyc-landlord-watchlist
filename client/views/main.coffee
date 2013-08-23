@@ -8,8 +8,8 @@ Template.header.helpers(
 Template.boroughs.events(
   'click a': (e) ->
     e.preventDefault()
-    Session.set('activeBorough', this.link)
-    console.log Session.get "activeBorough"
+    Session.set 'activeBorough', this.link
+    buildingSubscribe this.link
 )
 
 Template.boroughs.helpers(

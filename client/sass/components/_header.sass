@@ -2,21 +2,17 @@
   padding-top: $topnav-height + $border-width
   +box-sizing(border-box)
 
-.navbar
-  background-color: $blue
-  border-bottom: $border-width solid $grey
-  height: $topnav-height
+#header 
+  #borough-tabs.nav-pills 
+    margin-bottom: 0
+    position: absolute
+    top: 40px
+    right: 5px
 
-  .brand
-    padding-top: 13px
+  #borough-tabs.nav-pills li a
+    &:active,
+    &.active 
+      background-color: #364350
+      border-color: #364350
+      color: #fff
 
-  .links
-    margin-top: ($topnav-height - 34px) / 2 - 2.5px
-
-    .btn
-      margin-top: 1px
-
-    .nav a
-      +serif
-      color: $white !important
-      +text-shadow(none)

@@ -1,9 +1,31 @@
 <template name="map">
-  {{#if collectionsLoaded }}
-    {{#constant}}
-      <div id="map" class="map"></div>
-    {{/constant}}
-  {{else}}
-    <div id="container">LOADING</div>
-  {{/if}}
+  {{#constant}}
+    <div id="map" class="map"></div>
+  {{/constant}}
+</template>
+
+
+<template name="results">
+  <div id="results">
+    {{#each data}}
+      {{>buildingListItem}}
+    {{/each}}
+  </div>
+</template>
+
+
+<template name="popup">
+  <div class="popupWrapper">
+    <div class="item addressWrapper">
+      <div class="ranking pull-right"><span>#</span>{{rank}}</div>
+      <h2>{{street_address}}, <span>{{borough}}</span></h2>
+      <div>{{org}}</div>
+      <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
+      <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
+    </div>
+    <div class="imageWrapper pull-left">
+      <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
+    </div>
+    <div class="item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
+  </div>
 </template>

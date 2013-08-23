@@ -1,6 +1,10 @@
 <template name="buildingListItem">
   <div class="item {{active}}">
     <div class="pull-right">{{num}} violations</div>
+    <div class="pull-right delta red">
+      + 123 violations
+      since 2012
+    </div>
     <h3><a class="title" href="#">{{street_address}}</a></h3>
     <div>{{org}}</div>
     <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>

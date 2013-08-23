@@ -16,12 +16,17 @@ Template.buildingListItem.helpers(
 )
 
 Template.buildingListItem.events(
+<<<<<<< HEAD
+  'click ': (e) ->
+=======
   'click .title': (e) ->
-    openPopup this
+>>>>>>> 3d4e066dd8824828649956e12eb54c61a601790b
+    alert('adsf')
     e.preventDefault()
+    Session.set('activeBuilding', this._id)
 
   'click .share-story': (e) ->
   	#render item template
-    Template['bootstrapPop'].setup(buildingsPop(this))
     e.preventDefault()
+    Template['bootstrapPop'].setup(buildingsPop(this))
 )

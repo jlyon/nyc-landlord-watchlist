@@ -1,0 +1,528 @@
+# mysql steps for data aggregation
+create database landlordwatchlist;
+use landlordwatchlist;
+
+drop table if exists 2012_FOILVIOL;
+create table 2012_FOILVIOL (
+  ACTL_STRY INT(3) , 
+  ACTL_UNIT_INSP VARCHAR(6) , 
+  VIOL_ISSUE_DT VARCHAR(8) , 
+  HZRD_CLAS VARCHAR(1) , 
+  VIOL_TYP_ORDR_NO VARCHAR(4) , 
+  VIOL_SEQ_NO INT(10) , 
+  VIOL_ITEM_NO INT(10) , 
+  VAL_SHRT_NM VARCHAR(15) , 
+  LAST_VIOL_STTS_DT VARCHAR(8) , 
+  REQ_DT VARCHAR(8) , 
+  NOV_ORIG_CERT_DT VARCHAR(8) , 
+  LEAD_CERT_DT VARCHAR(8) , 
+  RECIVE_NOV_DT VARCHAR(8) , 
+  REINSPECT_DT VARCHAR(8) , 
+  LAST_INSP_RSLT_DT VARCHAR(8) , 
+  BLDG_ID INT(10) , 
+  VIOL_STTS INT(1) , 
+  BORO INT(1) , 
+  PHN VARCHAR(12) , 
+  STR_NM          VARCHAR(32) , 
+  ZIP VARCHAR(9) , 
+  VIOL_DESC VARCHAR(500),
+  FULL_ADDRESS VARCHAR(150),
+  #id MEDIUMINT NOT NULL AUTO_INCREMENT,
+  KEY `BLDG_ID` (`BLDG_ID`)
+  #PRIMARY KEY `id` (`id`)
+);
+
+
+#chown mysql:mysql 2012_FOILVIOL.csv
+# CLI: mysqlimport --fields-optionally-enclosed-by="\"" --fields-terminated-by=, --lines-terminated-by="\r\n" -uroot -p landlordwatchlist "/var/lib/mysql/landlordwatchlist/2012_FOILVIOL.csv"
+
+
+
+drop table if exists 2012_buildings_raw;
+create table 2012_buildings_raw (
+  PRP_PIN varchar(256),
+  BLDG_ID int(13),
+  BORODESC varchar(256),
+  PHN varchar(32),
+  STR_NM varchar(256),
+  ZIP varchar(256),
+  RANGE1 varchar(256),
+  BLK varchar(256),
+  LOT varchar(256),
+  CD varchar(256),
+  CENSUS_TRACT varchar(256),
+  STORIES varchar(256),
+  A_UNITS int(8),
+  B_UNITS int(8),
+  OWNERSHIP varchar(256),
+  MDRNO varchar(256),
+  CLASS varchar(256),
+  REG_DT varchar(256),
+  REG_EXPIRE_DT varchar(256),
+  OWNER1 varchar(256),
+  ORGANIZATION varchar(256),
+  OWNER1_LN varchar(256),
+  OWNER1_FN varchar(256),
+  OWNER1_DESC varchar(256),
+  OWNER1_HSNO varchar(256),
+  OWNER1_STNM varchar(256),
+  OWNER1_APT varchar(256),
+  OWNER1_CITY varchar(256),
+  OWNER1_STATE varchar(256),
+  OWNER1_ZIP varchar(256),
+  ORGANIZATION_2 varchar(256),
+  ORGANIZATION_3 varchar(256),
+  EMERG_CONTACT1 varchar(256),
+  EMERG_CONTACT2 varchar(256),
+  KEY `BLDG_ID` (`BLDG_ID`)
+); 
+
+# rm -r /var/lib/mysql/landlordwatchlist/2012_buildings_raw.csv
+# cp 2012_buildings_raw.csv /var/lib/mysql/landlordwatchlist/2012_buildings_raw.csv
+# chown mysql:mysql /var/lib/mysql/landlordwatchlist/2012_buildings_raw.csv
+
+# CLI: mysqlimport --fields-optionally-enclosed-by="\"" --fields-terminated-by=, -uroot -p landlordwatchlist "/var/lib/mysql/landlordwatchlist/2012_buildings_raw.csv"
+
+drop table if exists 2012_violations;
+create table 2012_violations (
+  ACTL_STRY INT(3) , 
+  ACTL_UNIT_INSP VARCHAR(6) , 
+  VIOL_ISSUE_DT VARCHAR(8) , 
+  HZRD_CLAS VARCHAR(1) , 
+  VIOL_TYP_ORDR_NO VARCHAR(4) , 
+  VIOL_SEQ_NO INT(10) , 
+  VIOL_ITEM_NO INT(10) , 
+  VAL_SHRT_NM VARCHAR(15) , 
+  LAST_VIOL_STTS_DT VARCHAR(8) , 
+  REQ_DT VARCHAR(8) , 
+  NOV_ORIG_CERT_DT VARCHAR(8) , 
+  LEAD_CERT_DT VARCHAR(8) , 
+  RECIVE_NOV_DT VARCHAR(8) , 
+  REINSPECT_DT VARCHAR(8) , 
+  LAST_INSP_RSLT_DT VARCHAR(8) , 
+  BLDG_ID INT(10) , 
+  VIOL_STTS INT(1) , 
+  BORO INT(1) , 
+  PHN VARCHAR(12) , 
+  STR_NM          VARCHAR(32) , 
+  ZIP VARCHAR(9) , 
+  VIOL_DESC VARCHAR(500),
+  FULL_ADDRESS VARCHAR(150),
+  KEY `BLDG_ID` (`BLDG_ID`)
+);
+
+insert into 2012_violations
+select * FROM 2012_FOILVIOL where VIOL_STTS=1;
+
+
+
+
+# select count(*) from 2012_FOILVIOL group by BLDG_ID;
+
+
+## DATE CONVERSION: d= new Date(parseInt(date.substr(4,4)), parseInt(date.substr(0,2)), parseInt(date.substr(2,2)))
+
+drop table if exists 2012_buildings;
+create table 2012_buildings (
+  BLDG_ID INT(10),
+  BORO INT(1) , 
+  PHN VARCHAR(12) , 
+  STR_NM          VARCHAR(32) , 
+  ZIP VARCHAR(9) ,
+  BOROUGH VARCHAR(32),
+  FULL_ADDRESS VARCHAR(150),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+);
+
+insert into 2012_buildings (
+  BLDG_ID, 
+  BORO,
+  PHN,
+  STR_NM,
+  ZIP,
+  num
+)
+select
+  BLDG_ID, 
+  BORO,
+  PHN,
+  STR_NM,
+  ZIP,
+  count(*)
+FROM 2012_FOILVIOL f1  where VIOL_STTS=1 group by BLDG_ID;
+
+update 2012_buildings set BOROUGH = "Manhattan" where BORO=1;
+update 2012_buildings set BOROUGH = "Bronx" where BORO=2;
+update 2012_buildings set BOROUGH = "Brooklyn" where BORO=3;
+update 2012_buildings set BOROUGH = "Queens" where BORO=4;
+update 2012_buildings set BOROUGH = "Staten Island" where BORO=5;
+update 2012_buildings set FULL_ADDRESS = CONCAT(PHN, " ", STR_NM, ", ", BOROUGH, ", NY ", ZIP);
+
+update 2012_buildings b set a = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="A");
+update 2012_buildings b set b = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="B");
+update 2012_buildings b set c = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="C");
+update 2012_buildings b set i = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="I");
+
+update 2012_buildings b set num = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID);
+
+
+
+drop table if exists 2012_buildings_all;
+create table 2012_buildings_all (
+  BLDG_ID INT(10),
+  PHN VARCHAR(12) , 
+  FULL_ADDRESS VARCHAR(150),
+  num INT(10) DEFAULT 0,
+  a INT(10) DEFAULT 0,
+  b INT(10) DEFAULT 0,
+  c INT(10) DEFAULT 0,
+  i INT(10) DEFAULT 0,
+  score FLOAT(8) DEFAULT 0,
+  BORODESC varchar(32),
+  A_UNITS int(8),
+  B_UNITS int(8),
+  STR_NM varchar(128),
+  ZIP varchar(8),
+  RANGE1 varchar(16),
+  BLK varchar(8),
+  CLASS  varchar(8),
+  OWNER1 varchar(128),
+  ORGANIZATION varchar(128),
+  OWNER1_LN varchar(128),
+  OWNER1_FN varchar(128),
+  OWNER1_STNM varchar(128),
+  OWNER1_APT varchar(128),
+  OWNER1_CITY varchar(128),
+  OWNER1_STATE varchar(32),
+  OWNER1_ZIP varchar(16),
+  ORGANIZATION_2 varchar(128),
+  ORGANIZATION_3 varchar(128),
+  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+);
+
+insert into 2012_buildings_all (
+  BLDG_ID, 
+  PHN,
+  FULL_ADDRESS,
+  num,
+  a,
+  b,
+  c,
+  i
+)
+select
+  BLDG_ID, 
+  PHN,
+  FULL_ADDRESS,
+  NUM,
+  a,
+  b,
+  c,
+  i
+FROM 2012_buildings;
+
+update 2012_buildings_all a
+left join 2012_buildings_raw b on
+  a.BLDG_ID = b.BLDG_ID
+set
+  a.A_UNITS=b.A_UNITS,
+  a.B_UNITS=b.B_UNITS,
+  a.STR_NM=b.STR_NM,
+  a.ZIP=b.ZIP,
+  a.RANGE1=b.RANGE1,
+  a.BLK=b.BLK,
+  a.CLASS=b.CLASS,
+  a.OWNER1=b.OWNER1,
+  a.ORGANIZATION=b.ORGANIZATION,
+  a.OWNER1_LN=b.OWNER1_LN,
+  a.OWNER1_FN=b.OWNER1_FN,
+  a.OWNER1_STNM=b.OWNER1_STNM,
+  a.OWNER1_APT=b.OWNER1_APT,
+  a.OWNER1_CITY=b.OWNER1_CITY,
+  a.OWNER1_STATE=b.OWNER1_STATE,
+  a.OWNER1_ZIP=b.OWNER1_ZIP,
+  a.ORGANIZATION_2=b.ORGANIZATION_2,
+  a.ORGANIZATION_3=b.ORGANIZATION_3;
+
+update 2012_buildings_all set
+  score=(b+c)/(A_UNITS+B_UNITS);
+
+
+
+
+drop table if exists 2012_buildings_watchlist;
+create table 2012_buildings_watchlist (
+  BLDG_ID INT(10),
+  PHN VARCHAR(12) , 
+  FULL_ADDRESS VARCHAR(150),
+  num INT(10) DEFAULT 0,
+  a INT(10) DEFAULT 0,
+  b INT(10) DEFAULT 0,
+  c INT(10) DEFAULT 0,
+  i INT(10) DEFAULT 0,
+  score FLOAT(8) DEFAULT 0,
+  BORODESC varchar(32),
+  A_UNITS int(8),
+  B_UNITS int(8),
+  STR_NM varchar(128),
+  ZIP varchar(8),
+  RANGE1 varchar(16),
+  BLK varchar(8),
+  CLASS  varchar(8),
+  OWNER1 varchar(128),
+  ORGANIZATION varchar(128),
+  OWNER1_LN varchar(128),
+  OWNER1_FN varchar(128),
+  OWNER1_STNM varchar(128),
+  OWNER1_APT varchar(128),
+  OWNER1_CITY varchar(128),
+  OWNER1_STATE varchar(32),
+  OWNER1_ZIP varchar(16),
+  ORGANIZATION_2 varchar(128),
+  ORGANIZATION_3 varchar(128),
+  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+);
+insert into 2012_buildings_watchlist
+select *
+FROM 2012_buildings_all
+where ((A_UNITS+B_UNITS >= 35 and score >= 2) or (A_UNITS+B_UNITS < 35 and score >= 3)) AND A_UNITS+B_UNITS >2;
+
+
+
+
+
+drop table if exists 2012_landlords_watchlist_grouped;
+create table 2012_landlords_watchlist_grouped (
+  num_bldgs INT(10),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  score FLOAT(10),
+  BORODESC varchar(32),
+  A_UNITS int(8),
+  B_UNITS int(8),
+  OWNER1 varchar(128),
+  ORGANIZATION varchar(128),
+  OWNER1_LN varchar(128),
+  OWNER1_FN varchar(128),
+  OWNER1_STNM varchar(128),
+  OWNER1_APT varchar(128),
+  OWNER1_CITY varchar(128),
+  OWNER1_STATE varchar(32),
+  OWNER1_ZIP varchar(16),
+  ORGANIZATION_2 varchar(256),
+  ORGANIZATION_3 varchar(256)
+);
+
+
+drop table if exists 2012_landlords_watchlist_grouped;
+create table 2012_landlords_watchlist_grouped (
+  org varchar(150),
+  officer  varchar(150),
+  bldg_ids varchar(200),
+  num_bldgs INT(10),
+  units INT(10),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  score FLOAT(10)
+);
+
+insert into 2012_landlords_watchlist_grouped
+select
+  ORGANIZATION_2,
+  CONCAT(OWNER1_FN, " ", OWNER1_LN),
+  GROUP_CONCAT(BLDG_ID SEPARATOR ' '),
+  count(*),
+  sum(A_UNITS+B_UNITS),
+  sum(num),
+  sum(a),
+  sum(b),
+  sum(c),
+  sum(i),
+  sum(score)
+from 2012_buildings_watchlist
+group by ORGANIZATION_2, OWNER1_LN, OWNER1_FN order by NUM desc limit 100;
+
+
+update 2012_landlords_watchlist_grouped set
+  score=(b+c)/units;
+
+#update 2012_landlords_watchlist_grouped a set 
+#  ORGANIZATION_2 = (select ORGANIZATION_2 from 2012_buildings_watchlist b where ORGANIZATION_2 != '' and a.OWNER1_LN = b.OWNER1_LN  and a.OWNER1_FN = b.OWNER1_FN and a.OWNER1_STNM = b.OWNER1_STNM limit 1);
+
+
+
+drop table if exists 2012_buildings_watchlist_grouped;
+create table 2012_buildings_watchlist_grouped (
+  num_bldgs INT(10),
+  BLDG_ID INT(10),
+  PHN VARCHAR(12) , 
+  FULL_ADDRESS VARCHAR(150),
+  score FLOAT(10),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  BORODESC varchar(32),
+  A_UNITS int(8),
+  B_UNITS int(8),
+  STR_NM varchar(128),
+  ZIP varchar(8),
+  RANGE1 varchar(16),
+  BLK varchar(8),
+  CLASS  varchar(8),
+  OWNER1 varchar(128),
+  ORGANIZATION varchar(128),
+  OWNER1_LN varchar(128),
+  OWNER1_FN varchar(128),
+  OWNER1_STNM varchar(128),
+  OWNER1_APT varchar(128),
+  OWNER1_CITY varchar(128),
+  OWNER1_STATE varchar(32),
+  OWNER1_ZIP varchar(16),
+  ORGANIZATION_2 varchar(256),
+  ORGANIZATION_3 varchar(256)
+);
+
+insert into 2012_buildings_watchlist_grouped
+select
+  count(*),
+  BLDG_ID,
+  PHN , 
+  FULL_ADDRESS,
+  sum(score),
+  sum(num),
+  sum(a),
+  sum(b),
+  sum(c),
+  sum(i),
+  BORODESC,
+  sum(A_UNITS),
+  sum(B_UNITS),
+  STR_NM,
+  ZIP,
+  RANGE1,
+  BLK,
+  CLASS,
+  OWNER1,
+  ORGANIZATION,
+  OWNER1_LN,
+  OWNER1_FN,
+  OWNER1_STNM,
+  OWNER1_APT,
+  OWNER1_CITY,
+  OWNER1_STATE,
+  OWNER1_ZIP,
+  ORGANIZATION_2, ORGANIZATION_3
+from 2012_buildings_watchlist
+group by STR_NM, OWNER1_LN, OWNER1_FN;
+
+update 2012_landlords_watchlist_grouped set
+  score=(b+c)/(A_UNITS+B_UNITS);
+
+#update 2012_buildings_1000 t1 set t1.a = (select count(*) from 2012_FOILVIOL t2 where t1.BLDG_ID=t2.BLDG_ID and t2.HZRD_CLAS="B") limit 5;
+
+
+
+
+
+
+drop table if exists 2012_buildings_watchlist_addresses;
+create table 2012_buildings_watchlist_addresses (
+  BLDG_ID INT(10),
+  FULL_ADDRESS VARCHAR(150),
+  lat FLOAT(10),
+  lng FLOAT(10),
+  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+);
+
+insert into 2012_buildings_watchlist_addresses
+  (
+    BLDG_ID,
+  FULL_ADDRESS)
+select
+  BLDG_ID,
+  FULL_ADDRESS
+from 2012_buildings_watchlist order by num desc;
+
+
+truncate table 2012_buildings_watchlist_addresses;
+
+# 
+rm -r /var/lib/mysql/landlordwatchlist/2012_buildings_watchlist_addresses.csv
+cp 2012_buildings_watchlist_addresses.csv /var/lib/mysql/landlordwatchlist/2012_buildings_watchlist_addresses.csv
+ chown mysql:mysql /var/lib/mysql/landlordwatchlist/2012_buildings_watchlist_addresses.csv
+
+# CLI: 
+mysqlimport --fields-optionally-enclosed-by="\"" --fields-terminated-by=, -uroot -p landlordwatchlist "/var/lib/mysql/landlordwatchlist/2012_buildings_watchlist_addresses.csv"
+
+
+
+
+
+drop table if exists 2012_buildings_watchlist_final;
+create table 2012_buildings_watchlist_final (
+  bldg_id INT(10),
+  street_address VARCHAR(150),
+  borough VARCHAR(48),
+  zip varchar(8),
+  lat FLOAT(10),
+  lng FLOAT(10),
+  units INT(10),
+  score FLOAT(10),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  org VARCHAR(150),
+  officer  varchar(150)
+);
+
+insert into 2012_buildings_watchlist_final
+select
+  l.BLDG_ID,
+  CONCAT(l.PHN, " ", l.STR_NM),
+  l.BORODESC,
+  l.ZIP,
+  a.lat,
+  a.lng,
+  sum(l.A_UNITS + l.B_UNITS),
+  l.score,
+  l.num,
+  l.a,
+  l.b,
+  l.c,
+  l.i,
+  l.ORGANIZATION_2,
+  CONCAT(l.OWNER1_FN, " ", l.OWNER1_LN)
+from 2012_buildings_watchlist l
+left join 2012_buildings_watchlist_addresses a on a.BLDG_ID = l.BLDG_ID
+group by l.BLDG_ID;
+
+update 2012_buildings_watchlist_final a set borough = (select BORODESC from 2012_buildings_raw b where b.bldg_id = a.bldg_id limit 1);
+
+# Export buildings, landlords as JSON from phpMyAdmin
+
+# Clean up buldings.json file
+#
+sed "s/\\\'/\'/g" buildings_orig.json >buildings1.json
+#
+sed "s/\"\ /\"/g" buildings3.csv >buildings4.csv
+#
+sed "s/\"\ /\"/g" buildings2.json >buildings3.json
+#
+mv buildings3.json buildings.json
+
+

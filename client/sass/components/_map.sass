@@ -1,21 +1,3 @@
-
-
-.circle-marker
-  background-color: #ff7800
-  border-color: black
-  border-radius: 100%
-  border-style: solid
-  border-width: 1px
-  width: 5px
-  height: 5px
-
-
-#map
-  z-index: 0
-
-  #geocode
-    z-index: 10
-
 .leaflet-top.leaflet-center
   width: 100%
   margin-left: 50px
@@ -33,8 +15,7 @@
       width: 290px
       float: left
       margin-right: 10px
-      
-
+    
     #leaflet-control-geosearch-submit i
       margin: 0
 
@@ -55,3 +36,94 @@
 
       .value
         margin-left: 5.5em
+
+.deblasio-logo
+  position: absolute
+  bottom: 20px
+  left: 10px
+
+
+#map
+  z-index: 0
+
+  #geocode
+    z-index: 10
+
+  .circle-marker
+    background-color: #ff7800
+    border-color: black
+    border-radius: 100%
+    border-style: solid
+    border-width: 1px
+    width: 5px
+    height: 5px
+
+  .leaflet-popup-content 
+    width: 360px !important
+
+  .leaflet-popup-content,
+  .popupWrapper h2 
+    margin: 0
+
+  .popupWrapper 
+    font-size: 1.2em
+
+  .popupWrapper .item 
+    border-bottom: 2px solid #d7d7d7
+    padding: 15px 1em 0
+
+  .popupWrapper .dataItem 
+    height: 45px
+
+  .popupWrapper .addressWrapper 
+    background-color: #EBEBEB
+    color: #364350
+    padding-bottom: 15px
+
+  .popupWrapper .addressWrapper .ranking
+    font-size: 3em
+    line-height: .8em
+    color: #A5A5A5
+    font-weight: bold
+    padding-right: 10px
+
+  .popupWrapper .addressWrapper .ranking span
+    font-size: .5em
+
+  .popupWrapper .addressWrapper #showData
+    color: #fff
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25)
+    background-color: #364350
+    background-image: -moz-linear-gradient(bottom,#2B353F,#364350)
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#364350),to(#2B353F))
+    background-image: -webkit-linear-gradient(bottom,#2B353F,#364350)
+    background-image: -o-linear-gradient(bottom,#2B353F,#364350)
+    background-image: linear-gradient(to bottom,#2B353F,#364350)
+    background-repeat: repeat-x
+    border-color: #2B353F #2B353F #364350
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25)
+
+
+
+  .popupWrapper .imageWrapper 
+    width: 150px
+    height: 120px
+
+  .popupWrapper .daysWrapper 
+    border-bottom: none
+
+  .popupWrapper .dataTitle 
+    color: #A5A5A5
+    float: left
+    width: 120px
+    display: block
+    padding-left: 10px
+
+  .popupWrapper .dataValue 
+    font-weight: bold
+    font-size: 2em
+    line-height: 1em
+
+  .popupWrapper .dataValue.highlighted 
+    color: #FE7E38
+  

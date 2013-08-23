@@ -1,16 +1,23 @@
 # marker collection
 
 #Buildings = new Meteor.Collection('buildings')
-Meteor.publish 'buildings', -> 
-  Buildings.find {lat: {$ne: 0}}, 
-    limit: 500
+Meteor.publish 'buildings', (borough, page) -> 
+  search = 
+    lat: {$ne: 0}
+  if borough? then search.borough = borough
+  console.log search
+  Buildings.find search, 
+    limit: 10
     sort:
       num: -1
 
+
+
+###
 Meteor.publish 'building', ->
   if id = Session.get("activeBuilding")
     Buildings.find {id: id}
-
+###
 ###
 ({},
   fields:
