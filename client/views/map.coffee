@@ -10,7 +10,6 @@ Template.results.helpers(
   title: ->
     Session.get "title"
   data: ->
-    console.log "results data"
     
     console.log Meteor.call "numBuildings", Session.get "activeBorough", Session.get "pageStart", (error, result) ->
       console.log(result)
@@ -21,8 +20,6 @@ Template.results.helpers(
     data = Buildings.find().fetch()
 
     if isReady()
-      console.log "res"
-      console.log data.length
       window.markersAdded = true
       updateMakers data
       return data
@@ -31,7 +28,6 @@ Template.results.helpers(
 Template.results.events(
   'click a': (e) ->
     e.preventDefault()
-    console.log "results click"
     Session.set('activeBorough', this._id)
 )
 
@@ -46,14 +42,10 @@ Template.pager.helpers(
     pageStart = Session.get "pageStart"
     if num < pageStart + pageSize then return num else return pageStart + pageSize
   active: ->
-    console.log this.value 
-    console.log Session.get "pageStart"
     if this.value is Session.get "pageStart" then "active" else ""
   pages: ->
-    console.log "pager update"
     pageStart = Session.get "pageStart"
     numBuildings = Session.get "numBuildings"
-    console.log numBuildings
     if pageStart > pageSize*2
       min = pageStart - pageSize*2
       endPages = 2
@@ -69,7 +61,6 @@ Template.pager.helpers(
         value: i
         class: if pageStart is i then "active" else ""
     items.push(label: "&raquo;", value: pageStart+pageSize) if pageStart + pageSize < numBuildings
-    console.log items
     return items
 )
 
@@ -153,8 +144,6 @@ Template.map.rendered = ->
 
 @updateMakers = (data) ->
   borough = Session.get "activeBorough"
-  console.log "update"
-  console.log data
   $results = $("#results")
   clearMarkers()
 
@@ -163,28 +152,30 @@ Template.map.rendered = ->
     # add fields to item
     item.size = Math.round(item.num/20) + 5;
     item.rank = index # @todo
-    item.latlng = 
+    latlng = itemLatlng(item)
 
     # add markers
-    marker = L.marker(itemLatlng(item),
-      icon: new L.divIcon(
-        className: 'circle-marker'
-        iconSize: [item.size, item.size]
-      )
-      title: item.org+', '+item.num+' outstanding requests'
-      name: item.org
-      index: index
-      opacity: .7
-      size: item.size
-      _id: item._id
-    ).on("click", (e) ->
-      item = Buildings.findOne({_id: e.target.options._id})
-      openPopup item
-      scroll $('#results'), $('#building-'+item._id)
-    ).addTo window.markerLayer
+    if latlng?
+      marker = L.marker(latlng,
+        icon: new L.divIcon(
+          className: 'circle-marker'
+          iconSize: [item.size, item.size]
+        )
+        title: item.org+', '+item.num+' outstanding requests'
+        name: item.org
+        index: index
+        opacity: .7
+        size: item.size
+        _id: item._id
+      ).on("click", (e) ->
+        item = Buildings.findOne({_id: e.target.options._id})
+        openPopup item
+        scroll $('#results'), $('#building-'+item._id)
+      ).addTo window.markerLayer
 
-    $("body").addClass "left-sidebar-active"
-    resizeMap()
+      $("body").addClass "left-sidebar-active"
+  
+  resizeMap()
 
 
 @openPopup = (item) ->
@@ -197,7 +188,8 @@ Template.map.rendered = ->
 
 
 @itemLatlng = (item) ->
-  return new L.LatLng parseFloat(item.lng), parseFloat(item.lat)
+  if item? and item.lat? and item.lng?
+    return new L.LatLng parseFloat(item.lng), parseFloat(item.lat)
 
 @resizeMap = ->
   window.setTimeout ->

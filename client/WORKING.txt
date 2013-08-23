@@ -438,8 +438,8 @@ update 2013_landlords_watchlist_grouped set
 
 
 
-drop table if exists 2013_buildings_watchlist_addresses;
-create table 2013_buildings_watchlist_addresses (
+drop table if exists 2013_buildings_watchlist_addresses_new;
+create table 2013_buildings_watchlist_addresses_new (
   BLDG_ID INT(10),
   FULL_ADDRESS VARCHAR(150),
   lat FLOAT(10),
@@ -447,25 +447,37 @@ create table 2013_buildings_watchlist_addresses (
   PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
 );
 
-insert into 2013_buildings_watchlist_addresses
-  (
-    BLDG_ID,
-  FULL_ADDRESS)
-select
-  BLDG_ID,
-  FULL_ADDRESS
-from 2013_buildings_watchlist order by num desc;
-
-
-truncate table 2013_buildings_watchlist_addresses;
+insert into
 
 # 
-rm -r /var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses.csv
-cp 2013_buildings_watchlist_addresses.csv /var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses.csv
- chown mysql:mysql /var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses.csv
+rm -r /var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses_new.csv
+cp 2013_buildings_watchlist_addresses_new.csv /var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses_new.csv
+ chown mysql:mysql /var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses_new.csv
 
 # CLI: 
-mysqlimport --fields-optionally-enclosed-by="\"" --fields-terminated-by=, -uroot -p landlordwatchlist "/var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses.csv"
+mysqlimport --fields-optionally-enclosed-by="\"" --fields-terminated-by=, -uroot -p landlordwatchlist "/var/lib/mysql/landlordwatchlist/2013_buildings_watchlist_addresses_new.csv"
+
+
+
+
+
+drop table if exists 2013_buildings_watchlist_addresses_new2;
+create table 2013_buildings_watchlist_addresses_new2 (
+  BLDG_ID INT(10),
+  FULL_ADDRESS VARCHAR(150),
+  lat FLOAT(10),
+  lng FLOAT(10),
+  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+);
+
+insert into 2013_buildings_watchlist_addresses_new2
+select
+  BLDG_ID,
+  CONCAT(PHN, " ", STR_NM, ", ", BOROUGH, ", NY ", ZIP);,
+  lat,
+  lng
+from 2013_buildings_watchlist_final WHERE ISNULL(lat);
+
 
 
 
@@ -516,6 +528,8 @@ group by l.BLDG_ID;
 
 update 2013_buildings_watchlist_final a set borough = (select BORODESC from 2013_buildings_raw b where b.bldg_id = a.bldg_id limit 1);
 
+update 2013_buildings_watchlist_final a set lat = (select lat from 2013_buildings_watchlist_addresses_new b where b.bldg_id = a.bldg_id limit 1) where a.lat=0 or isnull(lat);
+update 2013_buildings_watchlist_final a set lng = (select lng from 2013_buildings_watchlist_addresses_new b where b.bldg_id = a.bldg_id limit 1) where a.lng=0 or isnull(lng);
 
 
 

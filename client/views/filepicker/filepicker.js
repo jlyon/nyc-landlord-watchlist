@@ -6,7 +6,6 @@ Template.filepicker.rendered = function () {
     },
     {},
     function(InkBlob){
-      console.log(InkBlob)
       Template.storySubmit.addImages(InkBlob)
     },
     function(FPError){
@@ -59,7 +58,6 @@ Template.filepicker.events({
 // Callback after a successful upload
 function filepickerPick(files) {
   Meteor.post
-  console.log(files);
 
   for (var i in files) {
     var file = files[i];

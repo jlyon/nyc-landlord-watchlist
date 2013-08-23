@@ -14,7 +14,6 @@ Template.boroughs.events(
       url = '/buildings'
     else
       url = '/buildings/' + this.label.replace(' ', '-').replace('All buildings', '')
-    console.log url
     Meteor.Router.to url
 )
 
@@ -44,7 +43,6 @@ Template.borough.helpers(
       if this.label is "Landlords" then return "active"
     else
       current = Session.get "activeBorough"
-      console.log current
       if current is this.label then return 'active'
       if !current and this.label isnt "Landlords" and this.label == "All buildings" then return 'active'
     return ''
@@ -68,7 +66,6 @@ Template.bootstrapPop.helpers(
     Session.get 'bootstrapPop'
 
   getArgs: ->
-    console.log(this)
     this.bootstrapPopArgs
 )
 

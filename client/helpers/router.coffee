@@ -8,7 +8,6 @@ Meteor.Router.add(
 
   '/buildings': ->
       Session.set "title", "The worst buildings in NYC"
-      console.log "buildings"
       buildingsSubscribe()
       $("body").addClass "left-sidebar-active"
       $("body").removeClass "right-sidebar-active"

@@ -1,6 +1,4 @@
 submitForm = (e) ->
-  console.log("hahahah")
-
   media = []
 
   $(e.target).find('.media-item').each( ->
