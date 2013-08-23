@@ -28,6 +28,7 @@ Template.results.helpers(
 Template.results.events(
   'click a': (e) ->
     e.preventDefault()
+    console.log "results click"
     Session.set('activeBorough', this._id)
 )
 
@@ -46,6 +47,7 @@ Template.pager.helpers(
     console.log Session.get "pageStart"
     if this.value is Session.get "pageStart" then "active" else ""
   pages: ->
+    console.log "pager update"
     pageStart = Session.get "pageStart"
     numBuildings = Session.get "numBuildings"
     console.log numBuildings
@@ -70,7 +72,8 @@ Template.pager.helpers(
 Template.pager.events(
   'click a': (e) ->
     e.preventDefault()
-    Session.set('pageStart', this.value)
+    Session.set 'pageStart', this.value
+    buildingSubscribe Session.get("activeBorough"), this.value
 )
 
 

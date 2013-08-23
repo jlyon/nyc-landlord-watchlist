@@ -1,12 +1,14 @@
 Meteor.Router.add(
   '/': ->
     $("body").removeClass "left-sidebar-active"
+    Session.set "title", "Landlords"
     clearMarkers()
     "landlords"
 
   '/buildings': ->
       Session.set "title", "The worst buildings in NYC"
       console.log "buildings"
+      buildingSubscribe()
       $("body").addClass "left-sidebar-active"
       "results"
 

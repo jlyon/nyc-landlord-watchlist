@@ -8,39 +8,45 @@ Template.header.helpers(
 Template.boroughs.events(
   'click a': (e) ->
     e.preventDefault()
-    Meteor.Router.to '/buildings/' + this.label.replace(' ', '_').replace('All buildings', '')
+    if this.label is "Landlords" 
+      url = "/" 
+    else if this.label is "All buildings" 
+      url = '/buildings'
+    else
+      url = '/buildings/' + this.label.replace(' ', '-').replace('All buildings', '')
+    console.log url
+    Meteor.Router.to url
 )
 
 Template.boroughs.helpers(
   #Session.activeBorough null
   boroughs: ->
     boroughs = [
+      label: "Landlords"
+    ,
       label: "All buildings"
-      link: "all"
     ,
       label: "Bronx"
-      link: "bronx"
     ,
       label: "Brooklyn"
-      link: "brooklyn"
     ,
       label: "Manhattan"
-      link: "manhattan"
     ,
       label: "Queens"
-      link: "queens"
     ,
       label: "Staten Island"
-      link: "staten"
     ]
 )
 
 Template.borough.helpers(
   active: ->
-    current = Session.get "activeBorough"
-    console.log current
-    if current is this.label then return 'active'
-    if !current and this.label == "All buildings" then return 'active'
+    if Session.get("title") is "Landlords"
+      if this.label is "Landlords" then return "active"
+    else
+      current = Session.get "activeBorough"
+      console.log current
+      if current is this.label then return 'active'
+      if !current and this.label isnt "Landlords" and this.label == "All buildings" then return 'active'
     return ''
 )
 
