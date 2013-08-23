@@ -47,12 +47,16 @@ h2 {
   box-sizing: border-box;
 }
 
-/* line 6, ../sass/components/_header.sass */
+/* line 5, ../sass/components/_header.sass */
+#header {
+  display: none;
+}
+/* line 7, ../sass/components/_header.sass */
 #header .container {
   margin: 0;
   width: auto !important;
 }
-/* line 10, ../sass/components/_header.sass */
+/* line 11, ../sass/components/_header.sass */
 #header .navbar-inner {
   background-image: none;
   -webkit-box-shadow: none;
@@ -62,56 +66,56 @@ h2 {
   background-color: #404e5b;
   height: 70px;
 }
-/* line 13, ../sass/components/_header.sass */
+/* line 14, ../sass/components/_header.sass */
 #header .navbar-inner li > a {
   text-shadow: none;
 }
-/* line 17, ../sass/components/_header.sass */
+/* line 18, ../sass/components/_header.sass */
 #header .navbar-inner:first-child {
   background-color: #2d3645;
   height: 35px;
 }
-/* line 21, ../sass/components/_header.sass */
+/* line 22, ../sass/components/_header.sass */
 #header .navbar-inner:first-child li > a {
   color: #94b2ce;
   font-weight: normal;
 }
-/* line 26, ../sass/components/_header.sass */
+/* line 27, ../sass/components/_header.sass */
 #header .navbar-inner .borough-tabs {
   margin-top: 15px;
 }
-/* line 29, ../sass/components/_header.sass */
+/* line 30, ../sass/components/_header.sass */
 #header .navbar-inner .borough-tabs li > a {
   color: white;
   font-weight: bold;
   padding-bottom: 12px;
   padding-top: 12px;
 }
-/* line 35, ../sass/components/_header.sass */
+/* line 36, ../sass/components/_header.sass */
 #header .navbar-inner .borough-tabs li > a.active {
   background: #2d3645;
 }
-/* line 43, ../sass/components/_header.sass */
+/* line 44, ../sass/components/_header.sass */
 #header h1 {
   color: white;
   line-height: 50px;
   margin-left: 20px;
 }
-/* line 48, ../sass/components/_header.sass */
+/* line 49, ../sass/components/_header.sass */
 #header h1 span {
   font-weight: normal;
 }
 
-/* line 52, ../sass/components/_header.sass */
+/* line 53, ../sass/components/_header.sass */
 .borough-tabs-title {
   display: none !important;
 }
 
-/* line 56, ../sass/components/_header.sass */
+/* line 57, ../sass/components/_header.sass */
 .borough-tabs .nav-pills {
   margin-bottom: 0;
 }
-/* line 60, ../sass/components/_header.sass */
+/* line 61, ../sass/components/_header.sass */
 .borough-tabs .nav-pills li a:active, .borough-tabs .nav-pills li a.active {
   background-color: #364350;
   border-color: #364350;
@@ -247,16 +251,20 @@ h2 {
   border-color: #2b353f #2b353f #364350;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 108, ../sass/components/_map.sass */
-#map .popupWrapper .imageWrapper {
-  width: 150px;
-  height: 120px;
+/* line 106, ../sass/components/_map.sass */
+#map .popupWrapper .box {
+  margin-left: 2%;
+  width: 32%;
 }
-/* line 112, ../sass/components/_map.sass */
+/* line 110, ../sass/components/_map.sass */
+#map .popupWrapper .box:first-child {
+  margin-left: 0;
+}
+/* line 117, ../sass/components/_map.sass */
 #map .popupWrapper .daysWrapper {
   border-bottom: none;
 }
-/* line 115, ../sass/components/_map.sass */
+/* line 120, ../sass/components/_map.sass */
 #map .popupWrapper .dataTitle {
   color: #a5a5a5;
   float: left;
@@ -264,13 +272,13 @@ h2 {
   display: block;
   padding-left: 10px;
 }
-/* line 122, ../sass/components/_map.sass */
+/* line 127, ../sass/components/_map.sass */
 #map .popupWrapper .dataValue {
   font-weight: bold;
   font-size: 2em;
   line-height: 1em;
 }
-/* line 127, ../sass/components/_map.sass */
+/* line 132, ../sass/components/_map.sass */
 #map .popupWrapper .dataValue.highlighted {
   color: #fe7e38;
 }

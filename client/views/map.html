@@ -18,16 +18,20 @@
 <template name="popup">
   <div class="popupWrapper">
     <div class="item addressWrapper">
-      <div class="ranking pull-right"><span>#</span>{{rank}}</div>
-      <h2>{{street_address}}, <span>{{borough}}</span></h2>
-      <div>{{org}}</div>
-      <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
-      <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
+      <div class="header">
+        <div class="box imageWrapper pull-left">
+          <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
+        </div>
+        <div class="box ranking pull-right"><span>#</span>{{rank}}</div>
+        <div class="box item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
+      </div>
+      <div class="main">
+        <h2>{{street_address}}, <span>{{borough}}</span></h2>
+        <div>{{org}}</div>
+        <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
+        <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
+      </div>
     </div>
-    <div class="imageWrapper pull-left">
-      <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
-    </div>
-    <div class="item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
   </div>
 </template>
 
