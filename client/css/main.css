@@ -47,10 +47,6 @@ h2 {
   box-sizing: border-box;
 }
 
-/* line 5, ../sass/components/_header.sass */
-#header {
-  display: none;
-}
 /* line 7, ../sass/components/_header.sass */
 #header .container {
   margin: 0;
