@@ -9,4 +9,7 @@
 
 @buildingSubscribe = (borough, startPage)->
   @buildingsHandle.stop()
+  console.log startPage
+  Session.set "borough", borough
+  Session.set "startPage", startPage
   @buildingsHandle = Meteor.subscribe 'buildings', borough, startPage
