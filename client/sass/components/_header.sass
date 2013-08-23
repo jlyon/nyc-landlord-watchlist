@@ -1,18 +1,66 @@
 .row-fluid
-  padding-top: $topnav-height + $border-width
+  padding-top: $topnav-height
   +box-sizing(border-box)
 
-#header 
-  #borough-tabs.nav-pills 
-    margin-bottom: 0
-    position: absolute
-    top: 40px
-    right: 5px
+#header
+  .container
+    margin: 0
+    width: auto!important
 
-  #borough-tabs.nav-pills li a
-    &:active,
-    &.active 
-      background-color: #364350
-      border-color: #364350
-      color: #fff
+  .navbar-inner
+    +reset-nav()
+
+    li > a
+      +reset-nav-text()
+
+    // top level
+    &:first-child
+      background-color: $blue-dark
+      height: 35px
+
+      li > a
+        color: $blue-light
+        font-weight: normal
+
+    // boroughs
+    .borough-tabs
+      margin-top: 15px
+
+      li > a        
+        color: $white
+        font-weight: bold
+        padding-bottom: 12px 
+        padding-top: 12px
+
+        &.active
+          background: $blue-dark
+
+
+    // secondary area
+    background-color: $blue
+    height: 70px
+
+  h1
+    color: $white
+    line-height: 50px
+    margin-left: $gut-out
+
+    span
+      font-weight: normal
+
+
+.borough-tabs-title
+  display: none!important
+
+.borough-tabs
+  .nav-pills 
+    margin-bottom: 0
+
+    li a
+      &:active,
+      &.active 
+        background-color: #364350
+        border-color: #364350
+        color: #fff
+    
 

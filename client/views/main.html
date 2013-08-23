@@ -5,9 +5,8 @@
 
 <body>
 
-  <div class="navbar navbar-fixed-top">
+  <div id="header" class="navbar navbar-fixed-top">
     {{>header}}
-    {{> meteorStatuses}}
   </div>
 
   <div class="row-fluid">
@@ -32,19 +31,24 @@
 
 
 <template name="header">
-  <ul class="outside-links nav nav-pills"><li><a href="/landlord-watchlist" title="">Home</a></li>
-    <li><a href="http://advocate.nyc.gov/landlord-watchlist/criteria" title="">Criteria &amp; Submissions</a></li>
-    <li><a href="http://advocate.nyc.gov/landlord-watchlist/tenant-rights" title="">Tenants' Rights</a></li>
-    <li><a href="http://advocate.nyc.gov/landlord-watchlist/landlord-resources" title="">Landlord Resources</a></li>
-    <li><a href="http://advocate.nyc.gov/buildingsinprogress" title="">Removed Bldgs</a></li>
-    <li><a href="http://advocate.nyc.gov/landlord-watchlist/rehab-list" title="">In Rehab</a></li>
-    <li><a href="http://advocate.nyc.gov/landlord-watchlist/spanish" title="">En español</a></li>
-    <li><a href="http://advocate.nyc.gov/landlord-watchlist/chinese" title=""> 中文</a></li>
-  </ul>
-
-  <h1 class="pull-left"><img src="images/logo.png" width="325" height="60" alt="NYCHA Watchlist - Tracking repairs in New York City public housing" ></h1>
-  
-  <h5 class="borough-tabs-title">View buildings by borough</h5>
+  <div class="navbar-inner">
+    <div class="container">
+      <!--<div class="nav-collapse collapse">-->
+      <ul class="outside-links nav nav-pills">
+        <!--<li><a href="/landlord-watchlist" title="">Home</a></li>-->
+        <li><a href="http://advocate.nyc.gov/landlord-watchlist/tenant-rights" title="">Tenants' Rights</a></li>
+        <li><a href="http://advocate.nyc.gov/landlord-watchlist/landlord-resources" title="">Landlord Resources</a></li>
+      </ul>
+      <ul class="outside-links nav nav-pills pull-right">
+        <li><a href="http://advocate.nyc.gov/landlord-watchlist/criteria" title="">Criteria &amp; Submissions</a></li>
+        <li><a href="http://advocate.nyc.gov/buildingsinprogress" title="">Removed Bldgs</a></li>
+        <li><a href="http://advocate.nyc.gov/landlord-watchlist/rehab-list" title="">In Rehab</a></li>
+        <li><a href="http://advocate.nyc.gov/landlord-watchlist/spanish" title="">En español</a></li>
+        <li><a href="http://advocate.nyc.gov/landlord-watchlist/chinese" title=""> 中文</a></li>
+      </ul>
+    </div>
+  </div>
+  <h1 class="pull-left"><!--<img src="images/logo.png" width="325" height="60" alt="NYCHA Watchlist - Tracking repairs in New York City public housing" >--><span>NYC's</span> Worst Landlords</h1>
   {{>boroughs}}
 
   <!--<button class="btn" id="show-menu"><span class="icon-reorder"></span></button>-->
@@ -52,11 +56,16 @@
 
 
 <template name="boroughs">
-  <ul class="nav nav-pills pull-right" id="borough-tabs">
-  {{#each boroughs}}
-    {{>borough}}
-  {{/each}}
-  </ul>
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="borough-tabs-title brand">View buildings by borough</div>
+      <ul class="borough-tabs nav nav-pills pull-right" id="borough-tabs">
+      {{#each boroughs}}
+        {{>borough}}
+      {{/each}}
+      </ul>
+    </div>
+  </div>
 </template>
 
 <template name="borough">

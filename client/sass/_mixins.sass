@@ -83,6 +83,14 @@
 @mixin box()
   +box-sizing(border-box)
 
+@mixin reset-nav()
+  background-image: none
+  +box-shadow(none)
+  border: 0
+
+@mixin reset-nav-text()
+  text-shadow: none
+
 @mixin logos($scale)
   a
     display: block
