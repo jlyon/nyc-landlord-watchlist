@@ -1,9 +1,23 @@
+<template name="buildings">
+  <div class="left-sidebar">
+    {{>results}}
+  </div>
+
+  <div class="main-content" id="main">
+    {{>map}}
+  </div>
+
+  <div class="right-sidebar">
+    <div class="" id="filters">
+    </div>
+  </div>
+</template>
+
 <template name="map">
   {{#constant}}
     <div id="map" class="map"></div>
   {{/constant}}
 </template>
-
 
 <template name="results">
   <div id="results">
@@ -34,12 +48,15 @@
 
 <template name="pager">
   <div class="pagination" id="">
-    <div class="result-summary">Showing 0 - 25 of 726 clinics.</div>
+    <div class="result-summary">Showing {{start}} - {{end}} of {{total}} clinics.</div>
     <ul>
-      <li class="active"><a href="#" rel="0">1</a></li>
-      <li class=""><a href="#" rel="25">2</a></li>
+      {{#each pages}}
+        {{>pagerPage}}
+      {{/each}}
     </ul>
   </div>
 </template>
 
-
+<template name="pagerPage">
+  <li><a href="#" rel="{{value}}" class="{{class}}">{{label}}</a></li>
+</template>

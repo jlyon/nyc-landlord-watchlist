@@ -1,13 +1,19 @@
-
+###
 Template.map.helpers(
   collectionsLoaded: ->
     isReady
-  
 )
+###
+@pageSize = 25
+Session.set "pageStart", 0
 
 Template.results.helpers(
   data: ->
     console.log "results data"
+    Meteor.call "numBuildings", Session.get "pageStart", Session.get "pageStart", (error, result) ->
+      console.log(result)
+      Session.set("numBuildings", result)
+
     data = Buildings.find().fetch()
 
     if isReady()
@@ -20,8 +26,48 @@ Template.results.helpers(
 
 Template.results.events(
   'click a': (e) ->
+    e.preventDefault()
     Session.set('activeBorough', this._id)
 )
+
+
+Template.pager.helpers(
+  total: ->
+    return Session.get "numBuildings"
+  start: ->
+    return Session.get "pageStart"
+  end: ->
+    num = Session.get "numBuildings"
+    pageStart = Session.get "pageStart"
+    if num < pageStart + pageSize then return num else return pageStart + pageSize
+  pages: ->
+    pageStart = Session.get "pageStart"
+    numBuildings = Session.get "numBuildings"
+    console.log numBuildings
+    if pageStart > pageSize*2
+      min = pageStart - pageSize*2
+      endPages = 2
+    else
+      min = 0
+      endPages = 4 - pageStart/pageSize
+    max = (if numBuildings < pageStart + pageSize*endPages then numBuildings else pageStart + pageSize*endPages)
+    items = []
+    items.push(label: "&laquo;", value: pageStart-pageSize) if pageStart > 0
+    for i in [min..max] by pageSize
+      items.push
+        label: i/pageSize + 1
+        value: i
+        class: if pageStart == i then "active" else ""
+    items.push(label: "&raquo;", value: pageStart+pageSize) if pageStart + pageSize < numBuildings
+    return items
+)
+
+Template.pager.events(
+  'click a': (e) ->
+    e.preventDefault()
+    Session.set('activeBorough', this._id)
+)
+
 
 Template.map.rendered = ->
   console.log window.loaded
