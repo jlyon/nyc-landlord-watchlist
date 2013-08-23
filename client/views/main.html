@@ -12,24 +12,12 @@
 
   <div class="row-fluid">
 
-    <div class="left-sidebar">
-      {{>results}}
-    </div>
-
-    <div class="main-content" id="main">
-      {{> map}}
-    </div>
-
-    <div class="right-sidebar">
-      <div class="" id="filters">
-      </div>
-    </div>
+    {{renderPage}}
 
   </div>
   {{> bootstrapPop }}
 
 </body>
-
 
 <template name="header">
   <ul class="outside-links nav nav-pills"><li><a href="/landlord-watchlist" title="">Home</a></li>
@@ -49,6 +37,13 @@
 
   <!--<button class="btn" id="show-menu"><span class="icon-reorder"></span></button>-->
 </template>
+
+
+
+
+
+
+
 
 
 <template name="boroughs">
