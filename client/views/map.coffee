@@ -87,7 +87,6 @@ Template.map.rendered = ->
     window.markerLayer = new L.FeatureGroup()
     window.markerLayer.addTo window.map
 
-    $("body").addClass "left-sidebar-active"
     window.loaded = true
 
   #markers.push(marker);
@@ -133,6 +132,7 @@ Template.map.rendered = ->
   }
   j++;
   ###
+  
 
 @updateMakers = (data) ->
   borough = Session.get "activeBorough"
@@ -164,6 +164,9 @@ Template.map.rendered = ->
       openPopup item
     ).addTo window.markerLayer
 
+    $("body").addClass "left-sidebar-active"
+
+
 @openPopup = (item) ->
   Session.set('activeBuilding', this._id)
   item.location = encodeURIComponent(item.street_address + " " + item.borough + ", NY " + item.zip)
@@ -171,6 +174,7 @@ Template.map.rendered = ->
     .setLatLng(itemLatlng(item))
     .setContent(Template.popup(item))
     .openOn window.map
+
 
 @itemLatlng = (item) ->
   return new L.LatLng parseFloat(item.lng), parseFloat(item.lat)
