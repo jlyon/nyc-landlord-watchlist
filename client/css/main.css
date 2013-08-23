@@ -118,6 +118,92 @@ h2 {
   color: white;
 }
 
+/* line 2, ../sass/components/_landlords.sass */
+html.landlords,
+html.landlords body {
+  overflow: visible;
+}
+/* line 6, ../sass/components/_landlords.sass */
+html.landlords body > .row-fluid {
+  min-height: 1000px;
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* line 12, ../sass/components/_landlords.sass */
+.landlords {
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+}
+/* line 22, ../sass/components/_landlords.sass */
+.landlords .hero-unit {
+  padding: 40px;
+  margin-bottom: 0;
+  color: white;
+  font-weight: bold;
+  background: transparent;
+  text-shadow: 0 0 1px #2d3645;
+  text-shadow: 0 0 1px 3px #2d3645;
+}
+/* line 30, ../sass/components/_landlords.sass */
+.landlords .landlord-carousel-wrap {
+  /*background: rgba(0,0,0,0.2) */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-top: 35px;
+  position: relative;
+  width: 100%;
+  height: 470px;
+  overflow: hidden;
+}
+/* line 42, ../sass/components/_landlords.sass */
+.landlords .rs-carousel-action {
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+}
+/* line 48, ../sass/components/_landlords.sass */
+.landlords .rs-carousel-action-next {
+  right: 20px;
+}
+/* line 51, ../sass/components/_landlords.sass */
+.landlords .rs-carousel-action-prev {
+  left: 20px;
+}
+/* line 54, ../sass/components/_landlords.sass */
+.landlords .landlord {
+  background-color: #2d3645;
+  color: white;
+  cursor: pointer;
+  cursor: hand;
+  font-size: 80%;
+}
+/* line 64, ../sass/components/_landlords.sass */
+.landlords .landlord:hover {
+  background-color: #f59630;
+}
+/* line 67, ../sass/components/_landlords.sass */
+.landlords .landlord .thumbnail {
+  height: 420px;
+  width: 250px;
+}
+/* line 71, ../sass/components/_landlords.sass */
+.landlords .landlord .thumbnail .headshot {
+  width: 250px;
+  height: 167px;
+  background: #333333 url(/images/silhouette.png) center no-repeat;
+}
+/* line 76, ../sass/components/_landlords.sass */
+.landlords .landlord .thumbnail .headshot .rank {
+  padding: 10px;
+  color: white;
+}
+
 /* line 1, ../sass/components/_map.sass */
 .leaflet-top.leaflet-center {
   width: 100%;
