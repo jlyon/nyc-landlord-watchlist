@@ -1,13 +1,12 @@
 <template name="buildingListItem">
-  <div class="item {{active}}">
-    <div class="pull-right">{{num}} violations</div>
-    <div class="pull-right delta red">
-      + 123 violations
-      since 2012
+  <div class="item {{active}}" id="building-{{_id}}">
+    <div class="pull-right">
+      <div class="violations"><span class="num">{{num}}</span> <span class="text">violations</span></div>
+      <button class="see-details btn btn-small">See Details</button>
     </div>
-    <h3><a class="title" href="#">{{street_address}}</a></h3>
-    <div>{{org}}</div>
-    <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
-    <div><a href="#" class="share-story btn">Share Your Story</a></div>
+    <h2><a class="title" href="#">{{street_address}}</a></h2>
+    <h5>{{org}}</h5>
+    <h6>{{#if officer}}{{officer}}, Head Officer{{/if}}</h6>
+    <!--<div><a href="#" class="share-story btn">Share Your Story</a></div>-->
   </div>
 </template>

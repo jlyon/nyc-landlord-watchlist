@@ -17,13 +17,23 @@
     font-size: .9em
     font-style: italic
     
+  h2.title
+    padding: .5em 0
+    text-align: center
 
+  /*
+    .items-wrapper
+      &:nth-child(2n+1)
+        background-color: #99ff99
+    
   .item
     padding: 1em 5px
     margin-top: 10px
     position: relative
 
-    h3
+    h2
+      font-size: 1em
+      line-height: 1.3em
       a
         text-decoration: none
 
@@ -31,41 +41,20 @@
         color: $grey
         +sans-serif
         font-size: .8em
+    h5,
+    h6
+      margin: 0
+      text-transform: uppercase
+      font-weight: normal
 
-    .not-primary
-      display: none
+    .violations
+      text-align: center
 
-    .static-marker
-      position: absolute
-      left: inherit
-      top: inherit
+      .num
+        color: $orange
+        font-weight: bold
+        font-size: 1.5em
 
-    button.close
-      position: absolute
-      top: 5px
-      right: 5px
-
-    .summary
-      margin-left: 40px
-
-      .btn-directions
-        margin: 1em 0
-
-    &.active
-      background: $blue-light
-
-      .not-primary
+      .text
         display: block
-
-.fields
-  .title
-    width: 6.5em
-    text-align: right
-    position: absolute
-    font-weight: bold
-
-  .value
-    margin-left: 7em
-    display: block
-    margin-bottom: .2em
-
+        font-style: italic

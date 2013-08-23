@@ -1,0 +1,10 @@
+{
+    "name": "leaflet_geosearch",
+    "description": "A smart package that integrates with the L.geosearch plugin for Leaflet.",
+    "homepage": "https://github.com/Filepicker/meteor",
+    "author": "Jeff Lyon",
+    "version": "0.1.0",
+    "git": "https://github.com/Filepicker/meteor.git",
+    "packages": {}
+}
+

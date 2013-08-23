@@ -7,9 +7,10 @@
 @landlordsReady = ->
   landlordsHandle && landlordsHandle.ready()
 
-@buildingSubscribe = (borough, startPage)->
+@buildingsSubscribe = (borough, startPage)->
   @buildingsHandle.stop()
   console.log startPage
   Session.set "borough", borough
   Session.set "startPage", startPage
   @buildingsHandle = Meteor.subscribe 'buildings', borough, startPage
+

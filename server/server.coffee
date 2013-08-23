@@ -63,6 +63,11 @@ insertJSONfile = (file, insert, Coll) ->
   insert jsondata, Coll
 
 
+# Active building
+Meteor.publish 'building', (_id) -> 
+  Landlords.find({_id: _id})
+
+
 # User Stories
 Meteor.publish 'stories', ->
   user = Meteor.user();

@@ -7,11 +7,13 @@
 <template name="results">
   <div class="left-sidebar">
     <div id="results">
-      <h3>{{title}}</h3>
+      <h2 class="title">{{title}}</h2>
       {{>pager}}
-      {{#each data}}
-        {{>buildingListItem}}
-      {{/each}}
+      <div class="items-wrapper">
+        {{#each data}}
+          {{>buildingListItem}}
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +42,7 @@
 
 <template name="pager">
   <div class="pagination" id="">
-    <div class="result-summary">Showing {{start}} - {{end}} of {{total}} buildings.</div>
+    <div class="result-summary">Showing {{start}} - {{end}}<!-- of {{total}} buildings.--></div>
     <ul>
       {{#each pages}}
         {{>pagerPage}}

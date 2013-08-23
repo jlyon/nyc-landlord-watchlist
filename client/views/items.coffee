@@ -12,7 +12,7 @@ buildingsPop = (building) ->
 
 Template.buildingListItem.helpers(
   active: ->
-    return Session.get('activeBuilding') is this._id
+    if Session.get('activeBuilding') is this._id then "active" else ""
 )
 
 Template.buildingListItem.events(
@@ -24,4 +24,10 @@ Template.buildingListItem.events(
   	#render item template
     Template['bootstrapPop'].setup(buildingsPop(this))
     e.preventDefault()
+
+  'click .see-details': (e) ->
+    e.preventDefault()
+    openPopup this
+    $("body").addClass "right-sidebar-active"
+    resizeMap()
 )

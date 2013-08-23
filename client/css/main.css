@@ -48,11 +48,16 @@ h2 {
 }
 
 /* line 7, ../sass/components/_header.sass */
+#header .brand a {
+  color: white;
+  text-decoration: none;
+}
+/* line 11, ../sass/components/_header.sass */
 #header .container {
   margin: 0;
   width: auto !important;
 }
-/* line 11, ../sass/components/_header.sass */
+/* line 15, ../sass/components/_header.sass */
 #header .navbar-inner {
   background-image: none;
   -webkit-box-shadow: none;
@@ -62,56 +67,56 @@ h2 {
   background-color: #404e5b;
   height: 70px;
 }
-/* line 14, ../sass/components/_header.sass */
+/* line 18, ../sass/components/_header.sass */
 #header .navbar-inner li > a {
   text-shadow: none;
 }
-/* line 18, ../sass/components/_header.sass */
+/* line 22, ../sass/components/_header.sass */
 #header .navbar-inner:first-child {
   background-color: #2d3645;
   height: 35px;
 }
-/* line 22, ../sass/components/_header.sass */
+/* line 26, ../sass/components/_header.sass */
 #header .navbar-inner:first-child li > a {
   color: #94b2ce;
   font-weight: normal;
 }
-/* line 27, ../sass/components/_header.sass */
+/* line 31, ../sass/components/_header.sass */
 #header .navbar-inner .borough-tabs {
   margin-top: 15px;
 }
-/* line 30, ../sass/components/_header.sass */
+/* line 34, ../sass/components/_header.sass */
 #header .navbar-inner .borough-tabs li > a {
   color: white;
   font-weight: bold;
   padding-bottom: 12px;
   padding-top: 12px;
 }
-/* line 36, ../sass/components/_header.sass */
+/* line 40, ../sass/components/_header.sass */
 #header .navbar-inner .borough-tabs li > a.active {
   background: #2d3645;
 }
-/* line 44, ../sass/components/_header.sass */
+/* line 48, ../sass/components/_header.sass */
 #header h1 {
   color: white;
   line-height: 50px;
   margin-left: 20px;
 }
-/* line 49, ../sass/components/_header.sass */
+/* line 53, ../sass/components/_header.sass */
 #header h1 span {
   font-weight: normal;
 }
 
-/* line 53, ../sass/components/_header.sass */
+/* line 57, ../sass/components/_header.sass */
 .borough-tabs-title {
   display: none !important;
 }
 
-/* line 57, ../sass/components/_header.sass */
+/* line 61, ../sass/components/_header.sass */
 .borough-tabs .nav-pills {
   margin-bottom: 0;
 }
-/* line 61, ../sass/components/_header.sass */
+/* line 65, ../sass/components/_header.sass */
 .borough-tabs .nav-pills li a:active, .borough-tabs .nav-pills li a.active {
   background-color: #364350;
   border-color: #364350;
@@ -518,8 +523,8 @@ html.landlords body > .row-fluid {
     -moz-transition: all, 1s;
     -o-transition: all, 1s;
     transition: all, 1s;
-    right: -260px;
-    width: 260px;
+    right: -800px;
+    width: 800px;
     position: fixed;
     background-color: white;
   }
@@ -535,13 +540,18 @@ html.landlords body > .row-fluid {
 
   /* line 79, ../sass/components/_responsive-desktop.sass */
   .right-sidebar-active .main-content {
-    right: 260px;
+    right: 800px;
+    left: 0;
   }
-  /* line 82, ../sass/components/_responsive-desktop.sass */
+  /* line 83, ../sass/components/_responsive-desktop.sass */
   .right-sidebar-active .main-content #map {
     border-right: 2px solid #cccccc;
   }
-  /* line 85, ../sass/components/_responsive-desktop.sass */
+  /* line 86, ../sass/components/_responsive-desktop.sass */
+  .right-sidebar-active .left-sidebar {
+    left: -320px;
+  }
+  /* line 89, ../sass/components/_responsive-desktop.sass */
   .right-sidebar-active .right-sidebar {
     right: 0;
   }
@@ -856,6 +866,9 @@ html.landlords body > .row-fluid {
 /* line 1, ../sass/components/_results.sass */
 #results {
   padding: 5px;
+  /* .items-wrapper
+   *   &:nth-child(2n+1)
+   *     background-color: #99ff99 */
 }
 /* line 4, ../sass/components/_results.sass */
 #results .pagination {
@@ -877,67 +890,53 @@ html.landlords body > .row-fluid {
   font-size: 0.9em;
   font-style: italic;
 }
-/* line 21, ../sass/components/_results.sass */
+/* line 20, ../sass/components/_results.sass */
+#results h2.title {
+  padding: 0.5em 0;
+  text-align: center;
+}
+/* line 29, ../sass/components/_results.sass */
 #results .item {
   padding: 1em 5px;
   margin-top: 10px;
   position: relative;
 }
-/* line 27, ../sass/components/_results.sass */
-#results .item h3 a {
+/* line 34, ../sass/components/_results.sass */
+#results .item h2 {
+  font-size: 1em;
+  line-height: 1.3em;
+}
+/* line 37, ../sass/components/_results.sass */
+#results .item h2 a {
   text-decoration: none;
 }
-/* line 30, ../sass/components/_results.sass */
-#results .item h3 span {
+/* line 40, ../sass/components/_results.sass */
+#results .item h2 span {
   color: #cccccc;
   font-family: "open-sans", sans-serif;
   font-size: 0.8em;
 }
-/* line 35, ../sass/components/_results.sass */
-#results .item .not-primary {
-  display: none;
+/* line 44, ../sass/components/_results.sass */
+#results .item h5,
+#results .item h6 {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: normal;
 }
-/* line 38, ../sass/components/_results.sass */
-#results .item .static-marker {
-  position: absolute;
-  left: inherit;
-  top: inherit;
+/* line 50, ../sass/components/_results.sass */
+#results .item .violations {
+  text-align: center;
 }
-/* line 43, ../sass/components/_results.sass */
-#results .item button.close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-/* line 48, ../sass/components/_results.sass */
-#results .item .summary {
-  margin-left: 40px;
-}
-/* line 51, ../sass/components/_results.sass */
-#results .item .summary .btn-directions {
-  margin: 1em 0;
-}
-/* line 54, ../sass/components/_results.sass */
-#results .item.active {
-  background: #94b2ce;
-}
-/* line 57, ../sass/components/_results.sass */
-#results .item.active .not-primary {
-  display: block;
-}
-
-/* line 61, ../sass/components/_results.sass */
-.fields .title {
-  width: 6.5em;
-  text-align: right;
-  position: absolute;
+/* line 53, ../sass/components/_results.sass */
+#results .item .violations .num {
+  color: #f59630;
   font-weight: bold;
+  font-size: 1.5em;
 }
-/* line 67, ../sass/components/_results.sass */
-.fields .value {
-  margin-left: 7em;
+/* line 58, ../sass/components/_results.sass */
+#results .item .violations .text {
   display: block;
-  margin-bottom: 0.2em;
+  font-style: italic;
 }
 
 /* No files to import found in includes/* */

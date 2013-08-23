@@ -77,7 +77,7 @@ Template.pager.events(
   'click a': (e) ->
     e.preventDefault()
     Session.set 'pageStart', this.value
-    buildingSubscribe Session.get("activeBorough"), this.value
+    buildingsSubscribe Session.get("activeBorough"), this.value
 )
 
 
@@ -97,6 +97,9 @@ Template.map.rendered = ->
     
     window.markerLayer = new L.FeatureGroup()
     window.markerLayer.addTo window.map
+
+    window.popupLayer = new L.FeatureGroup()
+    window.popupLayer.addTo window.map
 
     window.loaded = true
 
@@ -146,6 +149,7 @@ Template.map.rendered = ->
 
 @clearMarkers = ->
   window.markerLayer.clearLayers() if window.markerLayer?
+  window.popupLayer.clearLayers() if window.popupLayer?
 
 @updateMakers = (data) ->
   borough = Session.get "activeBorough"
@@ -176,9 +180,11 @@ Template.map.rendered = ->
     ).on("click", (e) ->
       item = Buildings.findOne({_id: e.target.options._id})
       openPopup item
+      scroll $('#results'), $('#building-'+item._id)
     ).addTo window.markerLayer
 
     $("body").addClass "left-sidebar-active"
+    resizeMap()
 
 
 @openPopup = (item) ->
@@ -192,3 +198,20 @@ Template.map.rendered = ->
 
 @itemLatlng = (item) ->
   return new L.LatLng parseFloat(item.lng), parseFloat(item.lat)
+
+@resizeMap = ->
+  window.setTimeout ->
+    window.map.invalidateSize animate: true
+  , 500
+
+@clearMap = ->
+  clearMarkers()
+  resizeMap()
+
+@scroll = (parent, element) ->
+  if window.responsive is "mobile"
+    parent = "body"
+    top = if element is 0 then 0 else $(element).offset().top - 75
+  else
+    top = if element is 0 then 0 else $(parent).scrollTop() + $(element).offset().top - $(parent).offset().top
+  $(parent).animate({ scrollTop: top }, { duration: 'slow', easing: 'swing'})
