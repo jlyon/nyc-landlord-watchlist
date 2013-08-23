@@ -145,8 +145,8 @@ html.landlords body > .row-fluid {
   color: white;
   font-weight: bold;
   background: transparent;
-  text-shadow: 0 0 1px #2d3645;
-  text-shadow: 0 0 1px 3px #2d3645;
+  text-shadow: 0 0 1px #2d3645, 0 0 1px 3px #2d3645;
+  text-shadow: 0 0 1px 3px #2d3645, 0 0 1px 3px #2d3645;
 }
 /* line 30, ../sass/components/_landlords.sass */
 .landlords .landlord-carousel-wrap {
@@ -243,6 +243,8 @@ html.landlords body > .row-fluid {
 .leaflet-container .leaflet-popup-content-wrapper {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
   border-radius: 0;
 }
 /* line 34, ../sass/components/_map.sass */
