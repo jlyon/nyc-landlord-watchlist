@@ -17,29 +17,31 @@ Template.boroughs.helpers(
   boroughs: ->
     boroughs = [
       label: "All buildings"
-      link: "All buildings"
+      link: "all"
     ,
       label: "Bronx"
-      link: "Bronx"
+      link: "bronx"
     ,
       label: "Brooklyn"
-      link: "Brooklyn"
+      link: "brooklyn"
     ,
       label: "Manhattan"
-      link: "Manhattan"
+      link: "manhattan"
     ,
       label: "Queens"
-      link: "Queens"
+      link: "queens"
     ,
       label: "Staten Island"
-      link: "Staten Island"
+      link: "staten"
     ]
 )
 
 Template.borough.helpers(
   active: ->
     current = Session.get "activeBorough"
+    console.log(current)
     if current is this.link then return 'active'
+    if !current and this.link == "all" then return 'active'
     return ''
 )
 
