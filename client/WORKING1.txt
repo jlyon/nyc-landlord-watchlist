@@ -163,12 +163,12 @@ update 2012_buildings set BOROUGH = "Queens" where BORO=4;
 update 2012_buildings set BOROUGH = "Staten Island" where BORO=5;
 update 2012_buildings set FULL_ADDRESS = CONCAT(PHN, " ", STR_NM, ", ", BOROUGH, ", NY ", ZIP);
 
-update 2012_buildings b set a = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="A");
-update 2012_buildings b set b = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="B");
-update 2012_buildings b set c = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="C");
-update 2012_buildings b set i = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="I");
+update 2012_buildings b set a = (select count(*) from 2012_violations v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="A");
+update 2012_buildings b set b = (select count(*) from 2012_violations v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="B");
+update 2012_buildings b set c = (select count(*) from 2012_violations v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="C");
+update 2012_buildings b set i = (select count(*) from 2012_violations v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID and v.HZRD_CLAS="I");
 
-update 2012_buildings b set num = (select count(*) from 2012_FOILVIOL v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID);
+update 2012_buildings b set num = (select count(*) from 2012_violations v where v.VIOL_STTS=1 and v.BLDG_ID=b.BLDG_ID);
 
 
 

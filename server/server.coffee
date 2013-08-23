@@ -27,6 +27,12 @@ Meteor.publish 'building', ->
 )
 ###
 
+Meteor.numBuildings = (borough, page) ->
+  return 100
+
+
+
+
 # landlord collection
 Meteor.publish 'landlords', ->
   Landlords.find()
@@ -45,18 +51,12 @@ Meteor.startup ->
 insertJSONfile = (file, insert, Coll) ->
   jsondata = undefined
   data = Assets.getText file
-  #console.log(err)
-  #console.log(data)
-  #throw err  if err
   if data
-    #console.log(got it)
     jsondata = JSON.parse(data)
-  #console.log(data)
   insert jsondata, Coll
 
 
 # User Stories
-
 Meteor.publish 'stories', ->
   user = Meteor.user();
   if Roles.userIsInRole(user._id, ['admin'])

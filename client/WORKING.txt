@@ -486,6 +486,7 @@ create table 2013_buildings_watchlist_final (
   b INT(10),
   c INT(10),
   i INT(10),
+  previous INT(10),
   org VARCHAR(150),
   officer  varchar(150)
 );
@@ -505,6 +506,7 @@ select
   l.b,
   l.c,
   l.i,
+  0,
   l.ORGANIZATION_2,
   CONCAT(l.OWNER1_FN, " ", l.OWNER1_LN)
 from 2013_buildings_watchlist l
@@ -512,6 +514,10 @@ left join 2013_buildings_watchlist_addresses a on a.BLDG_ID = l.BLDG_ID
 group by l.BLDG_ID;
 
 update 2013_buildings_watchlist_final a set borough = (select BORODESC from 2013_buildings_raw b where b.bldg_id = a.bldg_id limit 1);
+
+update 2013_buildings_watchlist_final a set previous = (select num from 2012_buildings b where b.bldg_id = a.bldg_id limit 1);
+
+
 
 # Export buildings, landlords as JSON from phpMyAdmin
 

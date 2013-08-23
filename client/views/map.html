@@ -7,6 +7,7 @@
 
 <template name="results">
   <div id="results">
+    {{>pager}}
     {{#each data}}
       {{>buildingListItem}}
     {{/each}}
@@ -29,3 +30,16 @@
     <div class="item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
   </div>
 </template>
+
+
+<template name="pager">
+  <div class="pagination" id="">
+    <div class="result-summary">Showing 0 - 25 of 726 clinics.</div>
+    <ul>
+      <li class="active"><a href="#" rel="0">1</a></li>
+      <li class=""><a href="#" rel="25">2</a></li>
+    </ul>
+  </div>
+</template>
+
+
