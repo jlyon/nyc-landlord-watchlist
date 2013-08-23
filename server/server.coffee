@@ -7,7 +7,7 @@ Meteor.publish 'buildings', (borough, page) ->
   if borough? then search.borough = borough
   console.log search
   Buildings.find search, 
-    limit: 10
+    limit: pageSize
     sort:
       num: -1
 

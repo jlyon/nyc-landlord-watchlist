@@ -4,10 +4,11 @@ Template.map.helpers(
     isReady
 )
 ###
-@pageSize = 25
 Session.set "pageStart", 0
 
 Template.results.helpers(
+  title: ->
+    Session.get "title"
   data: ->
     console.log "results data"
     Meteor.call "numBuildings", Session.get "pageStart", Session.get "pageStart", (error, result) ->
@@ -40,6 +41,10 @@ Template.pager.helpers(
     num = Session.get "numBuildings"
     pageStart = Session.get "pageStart"
     if num < pageStart + pageSize then return num else return pageStart + pageSize
+  active: ->
+    console.log this.value 
+    console.log Session.get "pageStart"
+    if this.value is Session.get "pageStart" then "active" else ""
   pages: ->
     pageStart = Session.get "pageStart"
     numBuildings = Session.get "numBuildings"
@@ -65,7 +70,7 @@ Template.pager.helpers(
 Template.pager.events(
   'click a': (e) ->
     e.preventDefault()
-    Session.set('activeBorough', this._id)
+    Session.set('pageStart', this.value)
 )
 
 
@@ -132,12 +137,14 @@ Template.map.rendered = ->
   j++;
   ###
 
+@clearMarkers = ->
+  window.markerLayer.clearLayers() if window.markerLayer?
 
 @updateMakers = (data) ->
   borough = Session.get "activeBorough"
   console.log "update"
   $results = $("#results")
-  window.markerLayer.clearLayers()
+  clearMarkers()
 
   _.each data, (item, index)->
 

@@ -1,19 +1,20 @@
 Meteor.Router.add(
   '/': ->
-    Session.set "activePage", "landlords"
     $("body").removeClass "left-sidebar-active"
+    clearMarkers()
     "landlords"
 
-  'buildings': ->
-      alert "asdf"
-      Session.set "activePage", "buidlings"
+  '/buildings': ->
+      Session.set "title", "The worst buildings in NYC"
       console.log "buildings"
       $("body").addClass "left-sidebar-active"
       "results"
 
   '/buildings/:borough': (borough) ->
-      Session.set "activeBorough", borough.replace('_', ' ')
-      Session.set "activePage", "buidlings"
-      $("body").addClass "left-sidebar-active"
-      "results"
+    borough = borough.replace('-', ' ')
+    Session.set "title", "The worst buildings in " + (if borough is "Bronx" then "the " + borough else borough)
+    Session.set "activeBorough", borough
+    buildingSubscribe borough, 0
+    $("body").addClass "left-sidebar-active"
+    "results"
 )
