@@ -9,6 +9,8 @@ queryBuildings = (borough, page) ->
     lat: {$ne: 0}
   if borough? then search.borough = borough
   if !page? then page = 0
+  _.extend search, {"exempt": {"$ne": 1}}
+  console.log search
   Buildings.find search, 
     limit: pageSize
     skip: page

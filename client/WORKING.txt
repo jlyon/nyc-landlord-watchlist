@@ -322,45 +322,6 @@ create table 2013_landlords_watchlist_grouped (
 );
 
 
-drop table if exists 2013_landlords_watchlist_grouped;
-create table 2013_landlords_watchlist_grouped (
-  org varchar(150),
-  officer  varchar(150),
-  bldg_ids varchar(200),
-  num_bldgs INT(10),
-  units INT(10),
-  num INT(10),
-  a INT(10),
-  b INT(10),
-  c INT(10),
-  i INT(10),
-  score FLOAT(10)
-);
-
-insert into 2013_landlords_watchlist_grouped
-select
-  ORGANIZATION_2,
-  CONCAT(OWNER1_FN, " ", OWNER1_LN),
-  GROUP_CONCAT(BLDG_ID SEPARATOR ' '),
-  count(*),
-  sum(A_UNITS+B_UNITS),
-  sum(num),
-  sum(a),
-  sum(b),
-  sum(c),
-  sum(i),
-  sum(score)
-from 2013_buildings_watchlist
-group by ORGANIZATION_2, OWNER1_LN, OWNER1_FN order by NUM desc limit 100;
-
-
-update 2013_landlords_watchlist_grouped set
-  score=(b+c)/units;
-
-#update 2013_landlords_watchlist_grouped a set 
-#  ORGANIZATION_2 = (select ORGANIZATION_2 from 2013_buildings_watchlist b where ORGANIZATION_2 != '' and a.OWNER1_LN = b.OWNER1_LN  and a.OWNER1_FN = b.OWNER1_FN and a.OWNER1_STNM = b.OWNER1_STNM limit 1);
-
-
 
 drop table if exists 2013_buildings_watchlist_grouped;
 create table 2013_buildings_watchlist_grouped (
@@ -479,6 +440,19 @@ select
 from 2013_buildings_watchlist_final WHERE ISNULL(lat);
 
 
+drop table if exists 2013_buildings_exempt;
+create table 2013_buildings_exempt (
+  BLDG_ID INT(10),
+  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+);
+# 
+rm -r /var/lib/mysql/landlordwatchlist/2013_buildings_exempt.csv
+cp 2013_buildings_exempt.csv /var/lib/mysql/landlordwatchlist/2013_buildings_exempt.csv
+ chown mysql:mysql /var/lib/mysql/landlordwatchlist/2013_buildings_exempt.csv
+# CLI: 
+mysqlimport --fields-optionally-enclosed-by="\"" --fields-terminated-by=, -uroot -p landlordwatchlist "/var/lib/mysql/landlordwatchlist/2013_buildings_exempt.csv"
+
+
 
 
 
@@ -500,7 +474,8 @@ create table 2013_buildings_watchlist_final (
   i INT(10),
   previous INT(10) default 0,
   org VARCHAR(150),
-  officer  varchar(150)
+  officer  varchar(150),
+  exempt BOOLEAN
 );
 
 insert into 2013_buildings_watchlist_final
@@ -520,16 +495,83 @@ select
   l.i,
   o.num,
   l.ORGANIZATION_2,
-  CONCAT(l.OWNER1_FN, " ", l.OWNER1_LN)
+  CONCAT(l.OWNER1_FN, " ", l.OWNER1_LN),
+  IF(not isnull(e.BLDG_ID),TRUE,FALSE) 
 from 2013_buildings_watchlist l
 left join 2013_buildings_watchlist_addresses a on a.BLDG_ID = l.BLDG_ID
 left join 2012_buildings o on a.BLDG_ID = o.BLDG_ID
+left join 2013_buildings_exempt e on a.BLDG_ID = e.BLDG_ID
 group by l.BLDG_ID;
 
 update 2013_buildings_watchlist_final a set borough = (select BORODESC from 2013_buildings_raw b where b.bldg_id = a.bldg_id limit 1);
+update 2013_buildings_watchlist_final set borough = "Staten Island" where borough = "Staten Is.";
 
 update 2013_buildings_watchlist_final a set lat = (select lat from 2013_buildings_watchlist_addresses_new b where b.bldg_id = a.bldg_id limit 1) where a.lat=0 or isnull(lat);
 update 2013_buildings_watchlist_final a set lng = (select lng from 2013_buildings_watchlist_addresses_new b where b.bldg_id = a.bldg_id limit 1) where a.lng=0 or isnull(lng);
+update 2013_buildings_watchlist_final a set lat = (select lat from 2013_buildings_watchlist_addresses_new2 b where b.bldg_id = a.bldg_id limit 1) where a.lat=0 or isnull(lat);
+update 2013_buildings_watchlist_final a set lng = (select lng from 2013_buildings_watchlist_addresses_new2 b where b.bldg_id = a.bldg_id limit 1) where a.lng=0 or isnull(lng);
+
+  
+
+drop table if exists 2013_landlords_watchlist_grouped;
+create table 2013_landlords_watchlist_grouped (
+  org varchar(150),
+  officer  varchar(150),
+  bldg_ids varchar(200),
+  num_bldgs INT(10),
+  units INT(10),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  score FLOAT(10)
+);
+
+insert into 2013_landlords_watchlist_grouped
+select
+  org,
+  officer,
+  GROUP_CONCAT(bldg_id SEPARATOR ' '),
+  count(*),
+  sum(units),
+  sum(num),
+  sum(a),
+  sum(b),
+  sum(c),
+  sum(i),
+  sum(score)
+from 2013_buildings_watchlist_final
+where exempt = 0
+group by org, officer order by num asc;
+
+
+drop table if exists 2013_landlords_watchlist_grouped_100;
+create table 2013_landlords_watchlist_grouped_100 (
+  org varchar(150),
+  officer  varchar(150),
+  bldg_ids varchar(200),
+  num_bldgs INT(10),
+  units INT(10),
+  num INT(10),
+  a INT(10),
+  b INT(10),
+  c INT(10),
+  i INT(10),
+  score FLOAT(10)
+);
+
+insert into 2013_landlords_watchlist_grouped_100
+select * from 2013_landlords_watchlist_grouped
+order by num desc;
+
+
+update 2013_landlords_watchlist_grouped set
+  score=(b+c)/units;
+
+#update 2013_landlords_watchlist_grouped a set 
+#  ORGANIZATION_2 = (select ORGANIZATION_2 from 2013_buildings_watchlist b where ORGANIZATION_2 != '' and a.OWNER1_LN = b.OWNER1_LN  and a.OWNER1_FN = b.OWNER1_FN and a.OWNER1_STNM = b.OWNER1_STNM limit 1);
+
 
 
 
