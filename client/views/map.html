@@ -22,13 +22,13 @@
         <div class="box imageWrapper">
           <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
         </div>
-        <div class="box ranking"><span>#</span>{{rank}}</div>
-        <div class="box item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
+        <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle">Total Violations:</span></div>
+        <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-up"></i>123</span><span class="dataTitle">Since 4/5/2011</span></div>
       </div>
       <div class="main">
         <h2>{{street_address}}, <span>{{borough}}</span></h2>
         <div>{{org}}</div>
-        <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
+        {{#if officer}}<div class="officer">{{officer}}, Head Officer</div>{{/if}}
         <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
       </div>
     </div>

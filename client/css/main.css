@@ -6,7 +6,7 @@ h1 {
 /* line 4, ../sass/_style.sass */
 h2 {
   font-size: 1.4em;
-  line-height: 1em;
+  line-height: 1.2em;
   padding-bottom: 0.2em;
   margin: 0;
   color: #364350;
@@ -198,34 +198,37 @@ h2 {
   height: 5px;
 }
 /* line 61, ../sass/components/_map.sass */
+#map .leaflet-popup-close-button {
+  padding: 2px 1px 0 0;
+}
+/* line 64, ../sass/components/_map.sass */
 #map .leaflet-popup-content {
   width: 360px !important;
 }
-/* line 64, ../sass/components/_map.sass */
+/* line 67, ../sass/components/_map.sass */
 #map .leaflet-popup-content,
 #map .popupWrapper h2 {
   margin: 0;
 }
-/* line 68, ../sass/components/_map.sass */
+/* line 71, ../sass/components/_map.sass */
 #map .popupWrapper {
   font-size: 1.2em;
 }
-/* line 71, ../sass/components/_map.sass */
+/* line 74, ../sass/components/_map.sass */
 #map .popupWrapper .item {
-  border-bottom: 2px solid #d7d7d7;
   padding: 15px 1em 0;
 }
-/* line 75, ../sass/components/_map.sass */
+/* line 78, ../sass/components/_map.sass */
 #map .popupWrapper .dataItem {
   height: 45px;
 }
-/* line 78, ../sass/components/_map.sass */
+/* line 81, ../sass/components/_map.sass */
 #map .popupWrapper .addressWrapper {
-  background-color: #ebebeb;
+  background-color: #fefefe;
   color: #364350;
   padding-bottom: 15px;
 }
-/* line 83, ../sass/components/_map.sass */
+/* line 86, ../sass/components/_map.sass */
 #map .popupWrapper .addressWrapper .ranking {
   font-size: 3em;
   line-height: 0.8em;
@@ -233,11 +236,11 @@ h2 {
   font-weight: bold;
   padding-right: 10px;
 }
-/* line 90, ../sass/components/_map.sass */
+/* line 93, ../sass/components/_map.sass */
 #map .popupWrapper .addressWrapper .ranking span {
   font-size: 0.5em;
 }
-/* line 93, ../sass/components/_map.sass */
+/* line 96, ../sass/components/_map.sass */
 #map .popupWrapper .addressWrapper #showData {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -251,7 +254,7 @@ h2 {
   border-color: #2b353f #2b353f #364350;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 109, ../sass/components/_map.sass */
+/* line 112, ../sass/components/_map.sass */
 #map .popupWrapper .box {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -263,36 +266,93 @@ h2 {
   overflow: hidden;
   width: 32%;
 }
-/* line 118, ../sass/components/_map.sass */
+/* line 121, ../sass/components/_map.sass */
 #map .popupWrapper .box:first-child {
   margin-left: 0;
 }
-/* line 125, ../sass/components/_map.sass */
+/* line 124, ../sass/components/_map.sass */
+#map .popupWrapper .box.dataItem {
+  border: 1px solid;
+  padding-top: 15px;
+  text-align: center;
+}
+/* line 129, ../sass/components/_map.sass */
+#map .popupWrapper .box.total {
+  background: #f6f6f6;
+  border-color: #efefef;
+}
+/* line 133, ../sass/components/_map.sass */
+#map .popupWrapper .box.total .highlighted {
+  color: #f59630;
+}
+/* line 136, ../sass/components/_map.sass */
+#map .popupWrapper .box.since {
+  background: #f1f1f1;
+  border-color: #eaeaea;
+}
+/* line 140, ../sass/components/_map.sass */
+#map .popupWrapper .box.since .highlighted {
+  color: #e02d33;
+}
+/* line 143, ../sass/components/_map.sass */
+#map .popupWrapper .dataTitle {
+  color: #a5a5a5;
+  display: block;
+  font-style: italic;
+  font-size: 0.7em;
+  padding-top: 7px;
+}
+/* line 150, ../sass/components/_map.sass */
+#map .popupWrapper .dataValue {
+  font-weight: bold;
+  font-size: 1.6em;
+  line-height: 1em;
+}
+/* line 155, ../sass/components/_map.sass */
+#map .popupWrapper .dataValue i {
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+/* line 163, ../sass/components/_map.sass */
 #map .popupWrapper .imageWrapper img {
   height: auto;
   max-width: 100% !important;
 }
-/* line 129, ../sass/components/_map.sass */
+/* line 167, ../sass/components/_map.sass */
 #map .popupWrapper .daysWrapper {
   border-bottom: none;
 }
-/* line 132, ../sass/components/_map.sass */
-#map .popupWrapper .dataTitle {
-  color: #a5a5a5;
-  float: left;
-  width: 120px;
-  display: block;
-  padding-left: 10px;
+/* line 170, ../sass/components/_map.sass */
+#map .popupWrapper .main {
+  clear: both;
+  max-width: 229px;
+  padding-top: 15px;
 }
-/* line 139, ../sass/components/_map.sass */
-#map .popupWrapper .dataValue {
-  font-weight: bold;
-  font-size: 2em;
-  line-height: 1em;
+/* line 175, ../sass/components/_map.sass */
+#map .popupWrapper .main,
+#map .popupWrapper .main h2 {
+  color: #333333;
 }
-/* line 144, ../sass/components/_map.sass */
-#map .popupWrapper .dataValue.highlighted {
-  color: #fe7e38;
+/* line 179, ../sass/components/_map.sass */
+#map .popupWrapper .main h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin-bottom: 0.3em;
+}
+/* line 184, ../sass/components/_map.sass */
+#map .popupWrapper .main div {
+  font-size: 13px;
+  margin-bottom: 0.2em;
+}
+/* line 188, ../sass/components/_map.sass */
+#map .popupWrapper .main .officer {
+  font-style: italic;
+}
+/* line 191, ../sass/components/_map.sass */
+#map .popupWrapper .main button {
+  right: 18px;
+  top: 116px;
+  position: absolute;
 }
 
 @media screen and (min-width: 620px) {

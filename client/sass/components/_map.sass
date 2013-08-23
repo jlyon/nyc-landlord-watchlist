@@ -58,6 +58,9 @@
     width: 5px
     height: 5px
 
+  .leaflet-popup-close-button
+    padding: 2px 1px 0 0
+
   .leaflet-popup-content 
     width: 360px !important
 
@@ -69,14 +72,14 @@
     font-size: 1.2em
 
   .popupWrapper .item 
-    border-bottom: 2px solid #d7d7d7
+    //border-bottom: 2px solid #d7d7d7
     padding: 15px 1em 0
 
   .popupWrapper .dataItem 
     height: 45px
 
   .popupWrapper .addressWrapper 
-    background-color: #EBEBEB
+    background-color: $grey-faint
     color: #364350
     padding-bottom: 15px
 
@@ -118,6 +121,41 @@
       &:first-child
         margin-left: 0
 
+      &.dataItem
+        border: 1px solid
+        padding-top: 15px
+        text-align: center
+
+      &.total
+        background: darken($grey-faint, 3%)
+        border-color: darken($grey-faint, 6%)
+
+        .highlighted
+          color: $orange
+
+      &.since
+        background: darken($grey-faint, 5%)
+        border-color: darken($grey-faint, 8%)
+
+        .highlighted
+          color: $red
+
+    .dataTitle 
+      color: #A5A5A5
+      display: block
+      font-style: italic
+      font-size: .7em
+      padding-top: 7px
+
+    .dataValue 
+      font-weight: bold
+      font-size: 1.6em
+      line-height: 1em
+
+      i
+        font-size: .8em
+        line-height: 1.4em
+
     .imageWrapper 
       //width: 150px
       //height: 120px
@@ -129,18 +167,33 @@
     .daysWrapper 
       border-bottom: none
 
-    .dataTitle 
-      color: #A5A5A5
-      float: left
-      width: 120px
-      display: block
-      padding-left: 10px
+    .main
+      clear: both
+      max-width: 229px
+      padding-top: 15px
 
-    .dataValue 
-      font-weight: bold
-      font-size: 2em
-      line-height: 1em
+      &,
+      h2
+        color: $black
 
-    .dataValue.highlighted 
-      color: #FE7E38
+      h2
+        font-size: 1.2em
+        font-weight: normal
+        margin-bottom: .3em
+
+      div
+        font-size: 13px
+        margin-bottom: .2em
+
+      .officer
+        font-style: italic
+
+      button
+        right: 18px
+        top: 116px
+        position: absolute
+
+
+
+
   
