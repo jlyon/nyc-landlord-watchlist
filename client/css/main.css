@@ -869,68 +869,73 @@ html.landlords body > .row-fluid {
   margin-bottom: 0.5em;
 }
 /* line 11, ../sass/components/_results.sass */
+#results .pagination a.active {
+  background-color: whitesmoke;
+  color: black;
+}
+/* line 15, ../sass/components/_results.sass */
 #results .result-summary {
   color: #999999;
   font-size: 0.9em;
   font-style: italic;
 }
-/* line 17, ../sass/components/_results.sass */
+/* line 21, ../sass/components/_results.sass */
 #results .item {
   padding: 1em 5px;
   margin-top: 10px;
   position: relative;
 }
-/* line 23, ../sass/components/_results.sass */
+/* line 27, ../sass/components/_results.sass */
 #results .item h3 a {
   text-decoration: none;
 }
-/* line 26, ../sass/components/_results.sass */
+/* line 30, ../sass/components/_results.sass */
 #results .item h3 span {
   color: #cccccc;
   font-family: "open-sans", sans-serif;
   font-size: 0.8em;
 }
-/* line 31, ../sass/components/_results.sass */
+/* line 35, ../sass/components/_results.sass */
 #results .item .not-primary {
   display: none;
 }
-/* line 34, ../sass/components/_results.sass */
+/* line 38, ../sass/components/_results.sass */
 #results .item .static-marker {
   position: absolute;
   left: inherit;
   top: inherit;
 }
-/* line 39, ../sass/components/_results.sass */
+/* line 43, ../sass/components/_results.sass */
 #results .item button.close {
   position: absolute;
   top: 5px;
   right: 5px;
 }
-/* line 44, ../sass/components/_results.sass */
+/* line 48, ../sass/components/_results.sass */
 #results .item .summary {
   margin-left: 40px;
 }
-/* line 47, ../sass/components/_results.sass */
+/* line 51, ../sass/components/_results.sass */
 #results .item .summary .btn-directions {
   margin: 1em 0;
 }
-/* line 50, ../sass/components/_results.sass */
+/* line 54, ../sass/components/_results.sass */
 #results .item.active {
   background: #94b2ce;
 }
-/* line 53, ../sass/components/_results.sass */
+/* line 57, ../sass/components/_results.sass */
 #results .item.active .not-primary {
   display: block;
 }
 
-/* line 57, ../sass/components/_results.sass */
+/* line 61, ../sass/components/_results.sass */
 .fields .title {
   width: 6.5em;
   text-align: right;
   position: absolute;
   font-weight: bold;
 }
-/* line 63, ../sass/components/_results.sass */
+/* line 67, ../sass/components/_results.sass */
 .fields .value {
   margin-left: 7em;
   display: block;
