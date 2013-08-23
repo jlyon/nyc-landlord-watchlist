@@ -8,8 +8,7 @@ Template.header.helpers(
 Template.boroughs.events(
   'click a': (e) ->
     e.preventDefault()
-    Session.set 'activeBorough', this.link
-    buildingSubscribe this.link
+    Meteor.Router.to '/buildings/' + this.label.replace(' ', '_').replace('All buildings', '')
 )
 
 Template.boroughs.helpers(
@@ -39,9 +38,9 @@ Template.boroughs.helpers(
 Template.borough.helpers(
   active: ->
     current = Session.get "activeBorough"
-    console.log(current)
-    if current is this.link then return 'active'
-    if !current and this.link == "all" then return 'active'
+    console.log current
+    if current is this.label then return 'active'
+    if !current and this.label == "All buildings" then return 'active'
     return ''
 )
 
@@ -109,4 +108,3 @@ Template.bootstrapPop.rendered = ->
 
 Template.bootstrapPop.created = ->
   Session.set('bootstrapPop', false)
-  console.log('hello')

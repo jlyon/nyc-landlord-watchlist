@@ -5,12 +5,14 @@
       <h3>In New York City</h3>
       <!--<p>Descriptive text goes here</p>-->
     </div>
-  	<div id="landlord-carousel" class="rs-carousel">
-    <ul class="thumbnails">
-      {{#each data}}
-        {{>landlord}}
-      {{/each}}
-    </ul>
+    <div class="landlord-carousel-wrap">
+    	<div id="landlord-carousel" class="rs-carousel">
+      <ul class="thumbnails">
+        {{#each data}}
+          {{>landlord}}
+        {{/each}}
+      </ul>
+     </div>
    </div>
   </div>
 </template>
