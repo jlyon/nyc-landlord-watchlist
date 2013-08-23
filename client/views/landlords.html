@@ -22,9 +22,9 @@
     <div class="thumbnail">
       <img data-src="holder.js/300x200" alt="" width="300" height="200">
       <div class="headshot"><h1 class="rank">{{rank}}</div></h1>
-      <h3>{{org}}</h3>
-      {{#if officer}}<h5>{{officer}}, Head Officer</h5>{{/if}}
-      <p>{{num}} infractions in {{num_bldgs}} {{building_text}} ({{units}} units)</p>
+      <h2>{{org}}</h2>
+      <h5>{{#if officer}}<h5>{{officer}}, Head Officer</h5>{{/if}}</h5>
+      <h6>{{num}} infractions in {{num_bldgs}} {{building_text}} ({{units}} units)</h6>
     </div>
   </li>
 </template>

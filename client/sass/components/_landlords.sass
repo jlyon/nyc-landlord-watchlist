@@ -45,6 +45,21 @@ html.landlords
     position: absolute
     top: 0 
 
+  .rs-carousel-action-next,
+  .rs-carousel-action-prev
+    top: 100px
+    background-color: $orange
+    color: $blue-dark
+    width: 50px
+    height: 50px
+    +border-radius(50px)
+    line-height: 50px
+    text-align: center
+
+    &:hover
+      background-color: $white
+      text-decoration: none
+
   .rs-carousel-action-next
     right: 20px
 
@@ -52,8 +67,11 @@ html.landlords
     left: 20px
   
   .landlord
-    background-color: $blue-dark
-    color: $white
+    //background-color: $blue-dark
+    background-color: $white
+    //color: $white
+    +border-radius(4px)
+    border-color: $blue-dark
     cursor: pointer
     cursor: hand
     font-size: 80%
@@ -64,13 +82,16 @@ html.landlords
     &:hover
       background-color: $orange
 
+    h2
+      margin-top: 20px
+
     .thumbnail
-      height: 420px
-      width: 250px
+      height: 350px
+      width: 225px
 
       .headshot
-        width: 250px
-        height: 167px
+        width: 225px
+        height: 150px
         background: $black url(/images/silhouette.png) center no-repeat
 
         .rank
