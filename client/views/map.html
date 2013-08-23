@@ -1,18 +1,3 @@
-<template name="buildings">
-  <div class="left-sidebar">
-    {{>results}}
-  </div>
-
-  <div class="main-content" id="main">
-    {{>map}}
-  </div>
-
-  <div class="right-sidebar">
-    <div class="" id="filters">
-    </div>
-  </div>
-</template>
-
 <template name="map">
   {{#constant}}
     <div id="map" class="map"></div>
@@ -20,11 +5,13 @@
 </template>
 
 <template name="results">
-  <div id="results">
-    {{>pager}}
-    {{#each data}}
-      {{>buildingListItem}}
-    {{/each}}
+  <div class="left-sidebar">
+    <div id="results">
+      {{>pager}}
+      {{#each data}}
+        {{>buildingListItem}}
+      {{/each}}
+    </div>
   </div>
 </template>
 

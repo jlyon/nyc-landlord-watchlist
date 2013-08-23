@@ -1,10 +1,11 @@
 <template name="landlords">
-  <div class="hero-unit">
-    <h1>The 100 Worst Landlords</h1>
-    <h3>In New York City</h3>
-    <!--<p>Descriptive text goes here</p>-->
-  </div>
   <div class="landlords">
+    <div class="hero-unit">
+      <h1>The 100 Worst Landlords</h1>
+      <h3>In New York City</h3>
+      <!--<p>Descriptive text goes here</p>-->
+    </div>
+  
     <ul class="thumbnails">
       {{#each data}}
         {{>landlord}}
