@@ -2,18 +2,18 @@
 
 #Buildings = new Meteor.Collection('buildings')
 Meteor.publish 'buildings', (borough, page) -> 
+  queryBuildings borough, page
+
+queryBuildings = (borough, page) -> 
   search = 
     lat: {$ne: 0}
   if borough? then search.borough = borough
   if !page? then page = 0
-  console.log search
   Buildings.find search, 
     limit: pageSize
     skip: page
     sort:
       num: -1
-
-
 
 ###
 Meteor.publish 'building', ->
@@ -29,9 +29,13 @@ Meteor.publish 'building', ->
 )
 ###
 
-Meteor.numBuildings = (borough, page) ->
-  console.log borough
-  return 100
+Meteor.methods(
+  numBuildings: (borough, page) ->
+    console.log(queryBuildings(borough, page).count())
+    queryBuildings(borough, page).count()
+)
+
+  
 
 
 

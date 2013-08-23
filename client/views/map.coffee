@@ -12,8 +12,10 @@ Template.results.helpers(
   data: ->
     console.log "results data"
     
-    Meteor.call "numBuildings", Session.get "activeBorough", Session.get "pageStart", (error, result) ->
+    console.log Meteor.call "numBuildings", Session.get "activeBorough", Session.get "pageStart", (error, result) ->
       console.log(result)
+      console.log error
+      console.log "called back"
       Session.set("numBuildings", result)
 
     data = Buildings.find().fetch()

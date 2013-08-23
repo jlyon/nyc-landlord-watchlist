@@ -1,1 +1,1 @@
-@pageSize = 25
+@pageSize = 1000
