@@ -1,13 +1,23 @@
-
+###
 Template.map.helpers(
   collectionsLoaded: ->
     isReady
-  
 )
+###
+Session.set "pageStart", 0
 
 Template.results.helpers(
+  title: ->
+    Session.get "title"
   data: ->
     console.log "results data"
+    
+    console.log Meteor.call "numBuildings", Session.get "activeBorough", Session.get "pageStart", (error, result) ->
+      console.log(result)
+      console.log error
+      console.log "called back"
+      Session.set("numBuildings", result)
+
     data = Buildings.find().fetch()
 
     if isReady()
@@ -20,11 +30,58 @@ Template.results.helpers(
 
 Template.results.events(
   'click a': (e) ->
+    e.preventDefault()
+    console.log "results click"
     Session.set('activeBorough', this._id)
 )
 
+
+Template.pager.helpers(
+  total: ->
+    return Session.get "numBuildings"
+  start: ->
+    return Session.get("pageStart") + 1
+  end: ->
+    num = Session.get "numBuildings"
+    pageStart = Session.get "pageStart"
+    if num < pageStart + pageSize then return num else return pageStart + pageSize
+  active: ->
+    console.log this.value 
+    console.log Session.get "pageStart"
+    if this.value is Session.get "pageStart" then "active" else ""
+  pages: ->
+    console.log "pager update"
+    pageStart = Session.get "pageStart"
+    numBuildings = Session.get "numBuildings"
+    console.log numBuildings
+    if pageStart > pageSize*2
+      min = pageStart - pageSize*2
+      endPages = 2
+    else
+      min = 0
+      endPages = 4 - pageStart/pageSize
+    max = (if numBuildings < pageStart + pageSize*endPages then numBuildings else pageStart + pageSize*endPages)
+    items = []
+    items.push(label: "&laquo;", value: pageStart-pageSize) if pageStart > 0
+    for i in [min..max] by pageSize
+      items.push
+        label: i/pageSize + 1
+        value: i
+        class: if pageStart is i then "active" else ""
+    items.push(label: "&raquo;", value: pageStart+pageSize) if pageStart + pageSize < numBuildings
+    console.log items
+    return items
+)
+
+Template.pager.events(
+  'click a': (e) ->
+    e.preventDefault()
+    Session.set 'pageStart', this.value
+    buildingSubscribe Session.get("activeBorough"), this.value
+)
+
+
 Template.map.rendered = ->
-  console.log window.loaded
   #if not $("body").hasClass "left-sidebar-active"
   #if window.map is `undefined`
   # create a map in the map div, set the view to a given place and zoom
@@ -41,7 +98,6 @@ Template.map.rendered = ->
     window.markerLayer = new L.FeatureGroup()
     window.markerLayer.addTo window.map
 
-    $("body").addClass "left-sidebar-active"
     window.loaded = true
 
   #markers.push(marker);
@@ -88,11 +144,15 @@ Template.map.rendered = ->
   j++;
   ###
 
+@clearMarkers = ->
+  window.markerLayer.clearLayers() if window.markerLayer?
+
 @updateMakers = (data) ->
   borough = Session.get "activeBorough"
   console.log "update"
+  console.log data
   $results = $("#results")
-  window.markerLayer.clearLayers()
+  clearMarkers()
 
   _.each data, (item, index)->
 
@@ -118,6 +178,9 @@ Template.map.rendered = ->
       openPopup item
     ).addTo window.markerLayer
 
+    $("body").addClass "left-sidebar-active"
+
+
 @openPopup = (item) ->
   Session.set('activeBuilding', this._id)
   item.location = encodeURIComponent(item.street_address + " " + item.borough + ", NY " + item.zip)
@@ -125,6 +188,7 @@ Template.map.rendered = ->
     .setLatLng(itemLatlng(item))
     .setContent(Template.popup(item))
     .openOn window.map
+
 
 @itemLatlng = (item) ->
   return new L.LatLng parseFloat(item.lng), parseFloat(item.lat)

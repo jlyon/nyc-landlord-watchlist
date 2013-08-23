@@ -1,5 +1,5 @@
 <head>
-  <title>Meteor Leaflet Demo</title>
+  <title>NYC's Worst Landlords Watchlist</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
@@ -12,6 +12,16 @@
   <div class="row-fluid">
 
     {{renderPage}}
+
+    <div class="main-content" id="main">
+      {{>map}}
+    </div>
+
+    <div class="right-sidebar">
+      <div class="" id="filters">
+      </div>
+    </div>
+    
 
   </div>
   {{> bootstrapPop }}
@@ -36,7 +46,7 @@
       </ul>
     </div>
   </div>
-  <h1 class="pull-left"><!--<img src="images/logo.png" width="325" height="60" alt="NYCHA Watchlist - Tracking repairs in New York City public housing" >--><span>NYC's</span> Worst Landlords</h1>
+  <h1 class="pull-left"><a href="/"><!--<img src="images/logo.png" width="325" height="60" alt="NYCHA Watchlist - Tracking repairs in New York City public housing" >--><span>NYC's</span> Worst Landlords</h1></a>
   {{>boroughs}}
 
   <!--<button class="btn" id="show-menu"><span class="icon-reorder"></span></button>-->

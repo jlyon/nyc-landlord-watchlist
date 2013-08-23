@@ -4,13 +4,15 @@
   {{/constant}}
 </template>
 
-
 <template name="results">
-  <div id="results">
-    {{>pager}}
-    {{#each data}}
-      {{>buildingListItem}}
-    {{/each}}
+  <div class="left-sidebar">
+    <div id="results">
+      <h3>{{title}}</h3>
+      {{>pager}}
+      {{#each data}}
+        {{>buildingListItem}}
+      {{/each}}
+    </div>
   </div>
 </template>
 
@@ -18,28 +20,35 @@
 <template name="popup">
   <div class="popupWrapper">
     <div class="item addressWrapper">
-      <div class="ranking pull-right"><span>#</span>{{rank}}</div>
-      <h2>{{street_address}}, <span>{{borough}}</span></h2>
-      <div>{{org}}</div>
-      <div>{{#if officer}}{{officer}}, Head Officer{{/if}}</div>
-      <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
+      <div class="header">
+        <div class="box imageWrapper">
+          <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
+        </div>
+        <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle">Total Violations:</span></div>
+        <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-up"></i>123</span><span class="dataTitle">Since 4/5/2011</span></div>
+      </div>
+      <div class="main">
+        <h2>{{street_address}}, <span>{{borough}}</span></h2>
+        <div>{{org}}</div>
+        {{#if officer}}<div class="officer">{{officer}}, Head Officer</div>{{/if}}
+        <button class="btn btn-small btn-primary pull-right" id="showData">See Details</button>
+      </div>
     </div>
-    <div class="imageWrapper pull-left">
-      <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
-    </div>
-    <div class="item dataItem"><span class="dataTitle">Total Violations:</span> <span class="dataValue highlighted">{{num}}</span></div>
   </div>
 </template>
 
 
 <template name="pager">
   <div class="pagination" id="">
-    <div class="result-summary">Showing 0 - 25 of 726 clinics.</div>
+    <div class="result-summary">Showing {{start}} - {{end}} of {{total}} buildings.</div>
     <ul>
-      <li class="active"><a href="#" rel="0">1</a></li>
-      <li class=""><a href="#" rel="25">2</a></li>
+      {{#each pages}}
+        {{>pagerPage}}
+      {{/each}}
     </ul>
   </div>
 </template>
 
-
+<template name="pagerPage">
+  <li><a href="#" rel="{{value}}" class="{{class}}">{{{label}}}</a></li>
+</template>
