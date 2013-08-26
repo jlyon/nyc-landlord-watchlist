@@ -6,10 +6,10 @@ Template.landlords.helpers(
     data
 )
 
-Template.landlords.events(
-  'click a': (e) ->
+Template.landlord.events(
+  'click': (e) ->
     e.preventDefault()
-    Session.set('activeBorough', this._id)
+    Meteor.Router.to "/landlords/" + this._id
 
   'mouseover': ->
     $('#landlord-' + this._id + ' .headshot').css 'background-image', 'url("http://maps.googleapis.com/maps/api/streetview?size=225x170&location=' + this.bldg_address + '&sensor=false")'

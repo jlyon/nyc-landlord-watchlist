@@ -7,10 +7,12 @@
 @landlordsReady = ->
   landlordsHandle && landlordsHandle.ready()
 
-@buildingsSubscribe = (borough, startPage)->
+@buildingsSubscribe = (borough, startPage, activeLandlord, activeBounds)->
   @buildingsHandle.stop()
+  console.log activeLandlord
+  console.log borough
   console.log startPage
   Session.set "borough", borough
   Session.set "startPage", startPage
-  @buildingsHandle = Meteor.subscribe 'buildings', borough, startPage 
+  @buildingsHandle = Meteor.subscribe 'buildings', borough, startPage, activeLandlord, activeBounds
 

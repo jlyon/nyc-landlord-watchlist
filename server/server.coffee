@@ -4,12 +4,19 @@
 Meteor.publish 'buildings', (borough, page) -> 
   queryBuildings borough, page
 
-queryBuildings = (borough, page) -> 
+queryBuildings = (borough, page, activeLandlord, activeBounds) -> 
   search = 
     lat: {$ne: 0}
+    "exempt": {"$ne": 1}
   if borough? then search.borough = borough
   if !page? then page = 0
-  _.extend search, {"exempt": {"$ne": 1}}
+  console.log activeLandlord
+  console.log borough
+  console.log page
+  console.log activeBounds
+  if activeLandlord? 
+    landlord = Landlords.findOne {_id: activeLandlord}
+    console.log landlord
   console.log search
   Buildings.find search, 
     limit: pageSize

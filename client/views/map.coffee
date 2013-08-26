@@ -67,7 +67,7 @@ Template.pager.events(
   'click a': (e) ->
     e.preventDefault()
     Session.set 'pageStart', this.value
-    buildingsSubscribe Session.get("activeBorough"), this.value
+    buildingsSubscribe Session.get("activeBorough"), this.value, Session.get("activeLandlord"), Session.get("activeBounds")
 )
 
 
@@ -134,18 +134,16 @@ Template.map.rendered = ->
         scroll $('#results'), $('#building-'+item._id)
       ).addTo window.markerLayer
 
-      $("body").addClass "left-sidebar-active"
+      $("body").addClass "left-sidebar-active"  
   
-  resizeMap()
-
+  # open the first popup (after a slight delay to allow item to be loaded in DOM)
   if window.changed
-
-    # open the first popup (after a slight delay to allow item to be loaded in DOM)
     window.setTimeout ->
       openPopup data[0]
       #Session.set "changed", false
     , 50
     window.changed = false
+    resizeMap()
 
 
 @openPopup = (item) ->
@@ -153,11 +151,14 @@ Template.map.rendered = ->
   item.location = encodeURIComponent(item.street_address + " " + item.borough + ", NY " + item.zip)
   item.change = item.num - item.previous
   if item.change > 0 then item.changeDirection = "up" else item.changeDirection = "down"
+  latlng = itemLatlng(item)
+  window.map.panTo latlng
   #item.change = Math.abs item.change
   popup = L.popup()
-    .setLatLng(itemLatlng(item))
+    .setLatLng(latlng)
     .setContent(Template.popup(item))
     .openOn window.map
+
 
 
 @setCenter = (item) ->
@@ -179,7 +180,7 @@ Template.map.rendered = ->
 @scroll = (parent, element) ->
   if window.responsive is "mobile"
     parent = "body"
-    top = if element is 0 then 0 else $(element).offset().top - 75
+    top = if element is 0 then 0 else $(element).offset().top - 65
   else
     top = if element is 0 then 0 else $(parent).scrollTop() + $(element).offset().top - $(parent).offset().top
   $(parent).animate({ scrollTop: top }, { duration: 'slow', easing: 'swing'})
