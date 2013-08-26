@@ -3,7 +3,7 @@
 
   .pagination
     text-align: center
-    margin: 0
+    margin: 0 0 10px 0
 
     .result-summary
       margin-bottom: .5em
@@ -28,7 +28,6 @@
     
   .item
     padding: 1em 5px
-    margin-top: 10px
     position: relative
 
     h2
@@ -46,6 +45,12 @@
       margin: 0
       text-transform: uppercase
       font-weight: normal
+
+    &:nth-child(odd)
+      background-color: $grey-faint
+
+    &.active
+      background-color: $blue-faint
 
     .violations
       text-align: center

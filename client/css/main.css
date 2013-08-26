@@ -353,7 +353,7 @@ html.landlords body > .row-fluid {
 }
 /* line 81, ../sass/components/_map.sass */
 #map .popupWrapper .addressWrapper {
-  background-color: #fefefe;
+  background-color: #f9f9f9;
   color: #364350;
   padding-bottom: 15px;
 }
@@ -407,8 +407,8 @@ html.landlords body > .row-fluid {
 }
 /* line 129, ../sass/components/_map.sass */
 #map .popupWrapper .box.total {
-  background: #f6f6f6;
-  border-color: #efefef;
+  background: #f1f1f1;
+  border-color: #eaeaea;
 }
 /* line 133, ../sass/components/_map.sass */
 #map .popupWrapper .box.total .highlighted {
@@ -416,8 +416,8 @@ html.landlords body > .row-fluid {
 }
 /* line 136, ../sass/components/_map.sass */
 #map .popupWrapper .box.since {
-  background: #f1f1f1;
-  border-color: #eaeaea;
+  background: #ececec;
+  border-color: #e5e5e5;
 }
 /* line 140, ../sass/components/_map.sass */
 #map .popupWrapper .box.since .highlighted {
@@ -913,7 +913,7 @@ html.landlords body > .row-fluid {
 /* line 4, ../sass/components/_results.sass */
 #results .pagination {
   text-align: center;
-  margin: 0;
+  margin: 0 0 10px 0;
 }
 /* line 8, ../sass/components/_results.sass */
 #results .pagination .result-summary {
@@ -938,42 +938,49 @@ html.landlords body > .row-fluid {
 /* line 29, ../sass/components/_results.sass */
 #results .item {
   padding: 1em 5px;
-  margin-top: 10px;
   position: relative;
 }
-/* line 34, ../sass/components/_results.sass */
+/* line 33, ../sass/components/_results.sass */
 #results .item h2 {
   font-size: 1em;
   line-height: 1.3em;
 }
-/* line 37, ../sass/components/_results.sass */
+/* line 36, ../sass/components/_results.sass */
 #results .item h2 a {
   text-decoration: none;
 }
-/* line 40, ../sass/components/_results.sass */
+/* line 39, ../sass/components/_results.sass */
 #results .item h2 span {
   color: #cccccc;
   font-family: "open-sans", sans-serif;
   font-size: 0.8em;
 }
-/* line 44, ../sass/components/_results.sass */
+/* line 43, ../sass/components/_results.sass */
 #results .item h5,
 #results .item h6 {
   margin: 0;
   text-transform: uppercase;
   font-weight: normal;
 }
-/* line 50, ../sass/components/_results.sass */
+/* line 49, ../sass/components/_results.sass */
+#results .item:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+/* line 52, ../sass/components/_results.sass */
+#results .item.active {
+  background-color: #c9e4ff;
+}
+/* line 55, ../sass/components/_results.sass */
 #results .item .violations {
   text-align: center;
 }
-/* line 53, ../sass/components/_results.sass */
+/* line 58, ../sass/components/_results.sass */
 #results .item .violations .num {
   color: #f59630;
   font-weight: bold;
   font-size: 1.5em;
 }
-/* line 58, ../sass/components/_results.sass */
+/* line 63, ../sass/components/_results.sass */
 #results .item .violations .text {
   display: block;
   font-style: italic;

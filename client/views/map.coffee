@@ -10,11 +10,10 @@ Template.results.helpers(
   title: ->
     Session.get "title"
   data: ->
+    borough = Session.get("activeBorough")
+    pageStart = Session.get("pageStart")
     
-    console.log Meteor.call "numBuildings", Session.get "activeBorough", Session.get "pageStart", (error, result) ->
-      console.log(result)
-      console.log error
-      console.log "called back"
+    Meteor.call "numBuildings", borough, pageStart, (error, result) ->
       Session.set("numBuildings", result)
 
     data = Buildings.find().fetch()
@@ -26,7 +25,7 @@ Template.results.helpers(
 )
 
 Template.results.events(
-  'click a': (e) ->
+  'click .item a': (e) ->
     e.preventDefault()
     Session.set('activeBorough', this._id)
 )
@@ -93,56 +92,17 @@ Template.map.rendered = ->
     window.popupLayer.addTo window.map
 
     window.loaded = true
+    console.log "RENDERED"
+    window.changed = true
 
-  #markers.push(marker);
-  ###.bindPopup(Meteor.render(Template.popup),{
-    closeButton: true
-  }).on('popupopen', function(e) {
-    jQuery('#building-list .item').removeClass('active');
-    jQuery('#building-list #building-' + this.options.i).addClass('active');
-    updateData(this.options.name, this.options.address);
-  }).on('popupclose', function(e) {
-    jQuery('#building-list .item').removeClass('active');
-  }).on('mouseover', function(e) {
-    var size = this.options.size + 5;
-    this.setOpacity(1);
-    this.setIcon(L.icon({
-      iconUrl: 'circle.png',
-      iconSize:   [size, size],
-      iconAnchor:   [size/2, size/2],
-      popupAnchor:  [0, -(size/2 + 5)]
-    }));
-  }).on('mouseout', function(m) {
-    var size = this.options.size;
-    this.setOpacity(.8);
-    this.setIcon(L.icon({
-      iconUrl: 'circle.png',
-      iconSize:   [size, size],
-      iconAnchor:   [size/2, size/2],
-      popupAnchor:  [0, -(size/2 + 5)]
-    }));
-  }).addTo(map);
-  
-
-  // Add data to the
-  if (j < 20) {
-    var stripe = (Math.round(j/2) == j/2) ? 'even' : 'odd';
-    $('<div class="item addressWrapper '+ stripe +'" id="building-'+ j +'"><div class="ranking pull-left dataValue highlighted">'+entry[5]+'</div><strong>'+entry[0]+'</strong><br/>'+entry[3]+'<br/>'+entry[4]).appendTo('#building-list');
-    jQuery('#building-list .item').bind('click', function() {
-      currentMarker = parseInt(jQuery(this).attr('id').replace('building-', ''));
-      showMarker();
-      stopCycle();
-      return false;
-    })
-  }
-  j++;
-  ###
 
 @clearMarkers = ->
   window.markerLayer.clearLayers() if window.markerLayer?
   window.popupLayer.clearLayers() if window.popupLayer?
 
+
 @updateMakers = (data) ->
+  console.log "update"
   borough = Session.get "activeBorough"
   $results = $("#results")
   clearMarkers()
@@ -151,7 +111,7 @@ Template.map.rendered = ->
 
     # add fields to item
     item.size = Math.round(item.num/20) + 5;
-    item.rank = index # @todo
+    item.rank = index + Session.get "pageStart" # @todo
     latlng = itemLatlng(item)
 
     # add markers
@@ -170,6 +130,7 @@ Template.map.rendered = ->
       ).on("click", (e) ->
         item = Buildings.findOne({_id: e.target.options._id})
         openPopup item
+        console.log 'clicked'
         scroll $('#results'), $('#building-'+item._id)
       ).addTo window.markerLayer
 
@@ -177,15 +138,30 @@ Template.map.rendered = ->
   
   resizeMap()
 
+  if window.changed
+
+    # open the first popup (after a slight delay to allow item to be loaded in DOM)
+    window.setTimeout ->
+      openPopup data[0]
+      #Session.set "changed", false
+    , 50
+    window.changed = false
+
 
 @openPopup = (item) ->
-  Session.set('activeBuilding', this._id)
+  Session.set('activeBuilding', item._id)
   item.location = encodeURIComponent(item.street_address + " " + item.borough + ", NY " + item.zip)
+  item.change = item.num - item.previous
+  if item.change > 0 then item.changeDirection = "up" else item.changeDirection = "down"
+  #item.change = Math.abs item.change
   popup = L.popup()
     .setLatLng(itemLatlng(item))
     .setContent(Template.popup(item))
     .openOn window.map
 
+
+@setCenter = (item) ->
+  window.map.panTo itemLatlng(item)
 
 @itemLatlng = (item) ->
   if item? and item.lat? and item.lng?

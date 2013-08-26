@@ -18,6 +18,7 @@ Template.buildingListItem.helpers(
 Template.buildingListItem.events(
   'click .title': (e) ->
     openPopup this
+    setCenter this
     e.preventDefault()
 
   'click .share-story': (e) ->

@@ -26,8 +26,8 @@
         <div class="box imageWrapper">
           <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
         </div>
-        <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle">Total Violations:</span></div>
-        <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-up"></i>123</span><span class="dataTitle">Since 4/5/2011</span></div>
+        <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle"><!--Total -->Violations in {{units}} units</span></div>
+        <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-{{changeDirection}}"></i>{{change}}</span><span class="dataTitle">Since July 2012</span></div>
       </div>
       <div class="main">
         <h2>{{street_address}}, <span>{{borough}}</span></h2>
@@ -42,7 +42,7 @@
 
 <template name="pager">
   <div class="pagination" id="">
-    <div class="result-summary">Showing {{start}} - {{end}}<!-- of {{total}} buildings.--></div>
+    <div class="result-summary">Showing {{start}} - {{end}} of {{total}} buildings.</div>
     <ul>
       {{#each pages}}
         {{>pagerPage}}

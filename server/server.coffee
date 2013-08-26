@@ -33,7 +33,6 @@ Meteor.publish 'building', ->
 
 Meteor.methods(
   numBuildings: (borough, page) ->
-    console.log(queryBuildings(borough, page).count())
     queryBuildings(borough, page).count()
 )
 
