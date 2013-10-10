@@ -1,26 +1,40 @@
 # marker collection
 
 #Buildings = new Meteor.Collection('buildings')
-Meteor.publish 'buildings', (borough, page) -> 
-  queryBuildings borough, page
+Meteor.publish 'buildings', (args) -> 
+  console.log args
+  queryBuildings args
 
-queryBuildings = (borough, page, activeLandlord, activeBounds) -> 
-  search = 
+
+#borough, page, activeLandlord, activeBounds
+queryBuildings = (args) -> 
+  search =
     lat: {$ne: 0}
     "exempt": {"$ne": 1}
-  if borough? then search.borough = borough
-  if !page? then page = 0
-  console.log activeLandlord
-  console.log borough
-  console.log page
-  console.log activeBounds
-  if activeLandlord? 
-    landlord = Landlords.findOne {_id: activeLandlord}
-    console.log landlord
+  if args.borough? then if args.borough isnt 'all' then search.borough = args.borough # todo:  and args.borough not 'all'
+  if !args.page? then args.page = 0 # todo: rm?
+
+  # Retrieve the landlord record and run a search
+  if args.activeLandlord? 
+    landlord = Landlords.findOne {_id: args.activeLandlord}
+    if landlord.bldg_ids?
+      bldg_ids = landlord.bldg_ids
+      if typeof bldg_ids isnt 'number'
+        bldg_ids = bldg_ids.split ' '
+        _.each bldg_ids, (num, index) ->
+          bldg_ids[index] = parseInt(num)
+        search = 
+          bldg_id: {$in: bldg_ids}
+      else
+        search = 
+          bldg_id: bldg_ids
+
   console.log search
+  a = Buildings.find search
+  console.log Object.keys(a.fetch()).length
   Buildings.find search, 
     limit: pageSize
-    skip: page
+    skip: args.page
     sort:
       num: -1
 
@@ -40,7 +54,10 @@ Meteor.publish 'building', ->
 
 Meteor.methods(
   numBuildings: (borough, page) ->
-    queryBuildings(borough, page).count()
+    queryBuildings(
+      borough: borough,
+      page: page
+    ).count()
 )
 
   
@@ -84,3 +101,4 @@ Meteor.publish 'stories', ->
 
   else
     Stories.find({ published: true })
+

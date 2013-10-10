@@ -108,7 +108,7 @@ create table 2013_violations (
   ZIP VARCHAR(9) , 
   VIOL_DESC VARCHAR(500),
   FULL_ADDRESS VARCHAR(150),
-  PRIMARY KEY `BLDG_ID` (`BLDG_ID`)
+  KEY `BLDG_ID` (`BLDG_ID`)
 );
 
 insert into 2013_violations
@@ -145,7 +145,7 @@ insert into 2013_buildings (
   PHN,
   STR_NM,
   ZIP,
-  sum(num)
+  num
 )
 select
   BLDG_ID, 
@@ -499,7 +499,7 @@ select
   IF(not isnull(e.BLDG_ID),TRUE,FALSE) 
 from 2013_buildings_watchlist l
 left join 2013_buildings_watchlist_addresses a on a.BLDG_ID = l.BLDG_ID
-left join 2012_buildings o on a.BLDG_ID = o.BLDG_ID
+left join 2013_buildings o on a.BLDG_ID = o.BLDG_ID
 left join 2013_buildings_exempt e on a.BLDG_ID = e.BLDG_ID
 group by l.BLDG_ID;
 
@@ -571,6 +571,34 @@ update 2013_landlords_watchlist_grouped set
 
 #update 2013_landlords_watchlist_grouped a set 
 #  ORGANIZATION_2 = (select ORGANIZATION_2 from 2013_buildings_watchlist b where ORGANIZATION_2 != '' and a.OWNER1_LN = b.OWNER1_LN  and a.OWNER1_FN = b.OWNER1_FN and a.OWNER1_STNM = b.OWNER1_STNM limit 1);
+
+
+
+drop table if exists 2013_violations_watchlist_final;
+create table 2013_violations_watchlist_final (
+  id INT(10) AUTO_INCREMENT,
+  bldg_id INT(10) ,
+  class VARCHAR(1) , 
+  description VARCHAR(500),
+  date VARCHAR(8) , 
+  KEY `BLDG_ID` (`BLDG_ID`),
+  PRIMARY KEY `id` (`id`)
+);
+
+insert into 2013_violations_watchlist_final (
+  bldg_id,
+  class,
+  description,
+  date
+)
+select
+  v.BLDG_ID,
+  v.HZRD_CLAS,
+  v.VIOL_DESC,
+  v.VIOL_ISSUE_DT
+  from 2013_violations v
+  left join 2013_buildings_watchlist_final w on v.BLDG_ID = w.bldg_id
+  where w.num > 0;
 
 
 

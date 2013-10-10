@@ -1,20 +1,28 @@
+
 <template name="landlords">
-  <div class="landlords">
-    <div class="hero-unit">
-      <h1>The 100 Worst Landlords</h1>
-      <h3>In New York City</h3>
-      <!--<p>Descriptive text goes here</p>-->
+
+  {{#if show}}
+    <div class="landlords">
+      {{#if hero}}
+        <div class="hero-unit">
+          <h1>The 100 Worst Landlords</h1>
+          <h3>In New York City</h3>
+          <!--<p>Descriptive text goes here</p>-->
+        </div>
+      {{/if}}
+
+      <div class="landlord-carousel-wrap">
+        <div id="landlord-carousel" class="rs-carousel">
+        <ul class="thumbnails">
+          {{#each data}}
+            {{>landlord}}
+          {{/each}}
+        </ul>
+      </div>
     </div>
-    <div class="landlord-carousel-wrap">
-    	<div id="landlord-carousel" class="rs-carousel">
-      <ul class="thumbnails">
-        {{#each data}}
-          {{>landlord}}
-        {{/each}}
-      </ul>
-     </div>
-   </div>
-  </div>
+  {{/if}}
+
+
 </template>
 
 <template name="landlord">

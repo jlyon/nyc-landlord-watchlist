@@ -1,6 +1,13 @@
 <head>
   <title>NYC's Worst Landlords Watchlist</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <link rel="stylesheet" type="text/css" href="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"/>
+  <script type="text/javascript" src="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"></script>
+  <script type="text/javascript">
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', {packages: ['table', 'controls']});
+  </script>
 </head>
 
 <body>
@@ -18,8 +25,7 @@
     </div>
 
     <div class="right-sidebar">
-      <div class="" id="filters">
-      </div>
+      {{>data}}
     </div>
     
 
@@ -48,7 +54,7 @@
   </div>
   <h1 class="pull-left brand"><a href="/"><!--<img src="images/logo.png" width="325" height="60" alt="NYCHA Watchlist - Tracking repairs in New York City public housing" >--><span>NYC's</span> Worst Landlords</h1></a>
   {{>boroughs}}
-
+  {{>landlords}}
   <!--<button class="btn" id="show-menu"><span class="icon-reorder"></span></button>-->
 </template>
 

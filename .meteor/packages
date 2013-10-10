@@ -18,3 +18,5 @@ filepicker
 router
 jquery-ui-carousel
 font-awesome
+leaflet-geosearch
+leaflet-locatecontrol

@@ -1,0 +1,62 @@
+<template name="data">
+
+  <div class="data-header">
+    <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="125" width="200" alt="Google StreetView Image @copy Google" />
+    <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle"><!--Total -->Violations in {{units}} units</span></div>
+    <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-{{changeDirection}}"></i>{{change}}</span><span class="dataTitle">Since July 2012
+    <div class="main">
+      <h2>{{bldg.street_address}}, <span>{{borough}}</span></h2>
+      <div>{{org}}</div>
+      {{#if officer}}<div class="officer">{{officer}}, Head Officer</div>{{/if}}
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs">
+    <li class="{{activeCategory}}"><a href="{{bldg_id}}/category">By Category</a></li>
+    <li class="{{activeTable}}"><a href="{{bldg_id}}/table">Data Table</a></li>
+    <li class="{{activeCloud}}"><a href="{{bldg_id}}/cloud">Word Cloud</a></li>
+  </ul>
+  <div class="data-content">
+    {{#if activeCategory}} {{>dataCategory}} {{/if}}
+    {{#if activeTable}} {{>dataTable}} {{/if}}
+    {{#if activeWordCloud}} {{>dataWordCloud}} {{/if}}
+  </div>
+</template>
+
+<template name="dataCategory">
+  {{#if dataLoading}}
+    Loading
+  {{else}}
+    <div id="dataCategory"></div>
+    <ul>
+    <li><strong>Class A</strong>: Non-hazardous violations, such as minor leaks or lack of signs designating floor numbers. An owner has 90 days to correct an A violation and two weeks to certify repair to remove the violation.</li>
+    <li><strong>Class B</strong>: Hazardous violations, such as requiring public doors to be self-closing, adequate lighting in public areas, lack of posted Certificate of Occupancy, or removal of vermin. An owner has 30 days to correct a B violation and two weeks to certify the correction to remove the violation.</li>
+    <li><strong>Class C</strong>: Immediately hazardous violations, such as inadequate fire exits, rodents, lead-based paint, lack of heat, hot water, electricity, or gas. An owner has 24 hours to correct a C violation and five days to certify the correction to remove the violation. If the owner fails to comply with emergency C violations such as lack of heat or hot water, HPD initiates corrective action through its Emergency Repair Program.</li>
+    <li><strong>Class I</strong>: Violations for which there is an order from a judge to correct a violation. This category also applies if the building is in the Alternative Enforcement Program or an order to vacate exists.</li>
+    </ul>
+  {{/if}}
+</template>
+
+<template name="dataTable">
+  {{#if dataLoading}}
+    Loading
+  {{else}}
+    <div id="dataDashboard">
+      <div id="dataControlClass"></div>
+      <div id="dataControlDescription"></div>
+      <div id="dataControlDate"></div>
+      <div id="dataTable"></div>
+    </div>
+  {{/if}}
+</template>
+
+
+<template name="dataWordCloud">
+  {{#if dataLoading}}
+    Loading
+  {{else}}
+    <div id="dataWordCloud"></div>
+  {{/if}}
+</template>
+
+

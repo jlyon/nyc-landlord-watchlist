@@ -7,13 +7,14 @@
 <template name="results">
   <div class="left-sidebar">
     <div id="results">
-      <h2 class="title">{{title}}</h2>
-      {{>pager}}
-      <div class="items-wrapper">
-        {{#each data}}
-          {{>buildingListItem}}
-        {{/each}}
-      </div>
+      {{#if ready}}
+        <h2 class="title">{{title}}</h2>
+        <div class="items-wrapper">
+          {{#each data}}
+            {{>buildingListItem}}
+          {{/each}}
+        </div>
+      {{/if}}
     </div>
   </div>
 </template>

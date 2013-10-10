@@ -1,18 +1,35 @@
-@buildingsHandle = Meteor.subscribe 'buildings'
+Deps.autorun ->
+  console.log('autorun')
+  window.buildingsHandle = Meteor.subscribe 'buildings',
+    borough: Session.get 'activeBorough'
+    page: Session.get "pageStart"
+    activeLandlord: Session.get 'activeLandlord'
+    activeBounds: null
+
+# Trigger Deps.autorun
+Session.set "pageStart", 0
+
 @landlordsHandle = Meteor.subscribe 'landlords'
 
 @isReady = ->
-  buildingsHandle && buildingsHandle.ready() && landlordsHandle && landlordsHandle.ready()
+  console.log 'isReady'
+  landlordsReady() and buildingsReady()
 
 @landlordsReady = ->
   landlordsHandle && landlordsHandle.ready()
 
+@buildingsReady = ->
+  window.buildingsHandle && window.buildingsHandle.ready()
+
 @buildingsSubscribe = (borough, startPage, activeLandlord, activeBounds)->
-  @buildingsHandle.stop()
+  ###
+  window.buildingsHandle.stop()
   console.log activeLandlord
   console.log borough
   console.log startPage
-  Session.set "borough", borough
-  Session.set "startPage", startPage
-  @buildingsHandle = Meteor.subscribe 'buildings', borough, startPage, activeLandlord, activeBounds
+  console.log('SUBSCRIBE')
+  
+  
+  @buildingsHandle = Meteor.subscribe 'buildings', borough: borough, startPage, activeLandlord, activeBounds
+  ###
 
