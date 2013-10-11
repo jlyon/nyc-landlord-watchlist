@@ -24,16 +24,15 @@ Template.landlord.events(
     console.log(this.rank*360)
     $('#landlord-carousel .thumbnails').css('left', - this.rank*360 + 'px')
     Meteor.Router.to "/landlords/" + this._id
-
-  'mouseover': ->
-    $('#landlord-' + this._id + ' .headshot').css 'background-image', 'url("http://maps.googleapis.com/maps/api/streetview?size=225x170&location=' + this.bldg_address + '&sensor=false")'
-  
-  'mouseout': ->
-    $('#landlord-' + this._id + ' .headshot').css 'background-image', 'url("/images/landlord.jpg")'
 )
 
 
 Template.landlord.helpers(
+  building_text: ->
+    if this.num_bldgs > 1 then "buildings" else "building"
+)
+
+Template.landlordProfile.helpers(
   building_text: ->
     if this.num_bldgs > 1 then "buildings" else "building"
 )

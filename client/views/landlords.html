@@ -28,11 +28,25 @@
 <template name="landlord">
   <li class="landlord" id="landlord-{{_id}}">
     <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="" width="300" height="200">
-      <div class="headshot"><h1 class="rank">{{rank}}</div></h1>
+      <div class="headshot"><img src="/images/landlords/landlord-{{rank}}.jpg" alt="Google StreetView Image @copy Google" width="300" height="200"><h1 class="rank">{{rank}}</div></h1>
       <h2>{{org}}</h2>
       <h5>{{#if officer}}<h5>{{officer}}, Head Officer</h5>{{/if}}</h5>
-      <h6>{{num}} infractions in {{num_bldgs}} {{building_text}} ({{units}} units)</h6>
+      <div class="box-wrapper">
+        <div class="box box-red dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle">infractions</span></div>
+        <div class="box box-orange dataItem"><span class="dataValue highlighted">{{units}}</span><span class="dataTitle">units in {{num_bldgs}} {{building_text}}</span></div>
+      </div>
     </div>
   </li>
+</template>
+
+
+<template name="landlordProfile">
+  <div class="landlord-profile" id="landlord-{{_id}}">
+    <img src="http://maps.googleapis.com/maps/api/streetview?size=310x200&location={{bldg_address}}&sensor=false" height="200" width="310" alt="Google StreetView Image @copy Google" />
+    <h2>{{org}}</h2>
+    <h5>{{#if officer}}<h5>{{officer}}, Head Officer</h5>{{/if}}</h5>
+    <div class="box box-red dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle">infractions</span></div>
+    <div class="box box-orange dataItem"><span class="dataValue highlighted">{{units}}</span><span class="dataTitle">units in {{num_bldgs}} {{building_text}}</span></div>
+    <h2>Buildings:</h2>
+  </div>
 </template>

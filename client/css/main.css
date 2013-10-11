@@ -215,38 +215,97 @@ html.landlords body > .row-fluid {
   cursor: pointer;
   cursor: hand;
   font-size: 80%;
+  position: relative;
 }
-/* line 83, ../sass/components/_landlords.sass */
+/* line 84, ../sass/components/_landlords.sass */
 .landlords .landlord:hover {
   background-color: white;
 }
-/* line 86, ../sass/components/_landlords.sass */
+/* line 87, ../sass/components/_landlords.sass */
 .landlords .landlord h2 {
-  margin-top: 20px;
+  margin-top: 10px;
 }
-/* line 89, ../sass/components/_landlords.sass */
-.landlords .landlord h5,
-.landlords .landlord h6 {
+/* line 90, ../sass/components/_landlords.sass */
+.landlords .landlord h5 {
   margin: 0;
 }
 /* line 93, ../sass/components/_landlords.sass */
-.landlords .landlord .thumbnail {
-  height: 350px;
-  width: 225px;
+.landlords .landlord .box-wrapper {
+  bottom: 5px;
+  position: absolute;
+  width: 235px;
 }
-/* line 97, ../sass/components/_landlords.sass */
-.landlords .landlord .thumbnail .headshot {
-  width: 225px;
-  height: 170px;
-  background: #333333 url(/images/landlord.jpg) center no-repeat;
+/* line 98, ../sass/components/_landlords.sass */
+.landlords .landlord .box {
+  width: 45%;
+  margin-left: 3%;
 }
 /* line 102, ../sass/components/_landlords.sass */
+.landlords .landlord .box .dataTitle {
+  font-size: 1em;
+  line-height: 1.2em;
+}
+/* line 106, ../sass/components/_landlords.sass */
+.landlords .landlord .thumbnail {
+  height: 355px;
+  width: 225px;
+}
+/* line 110, ../sass/components/_landlords.sass */
+.landlords .landlord .thumbnail .headshot {
+  position: relative;
+}
+/* line 116, ../sass/components/_landlords.sass */
 .landlords .landlord .thumbnail .headshot .rank {
-  padding: 10px;
+  position: absolute;
+  top: 0;
   color: white;
   font-size: 4em;
   font-weight: bold;
   text-align: right;
+}
+
+/* line 128, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords {
+  left: 400px;
+}
+/* line 131, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .landlord-carousel-wrap {
+  height: 200px;
+}
+/* line 134, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .rs-carousel-action-next,
+.left-sidebar-active .landlords .rs-carousel-action-prev {
+  top: 75px;
+}
+/* line 140, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .landlord .thumbnail {
+  width: 100px;
+  height: 120px;
+}
+/* line 144, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .landlord .thumbnail img {
+  width: 100px;
+  height: auto;
+}
+/* line 148, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .landlord .thumbnail h1 {
+  margin-left: 5px;
+  line-height: 30px;
+}
+/* line 152, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .landlord .thumbnail h2 {
+  font-size: 1em;
+  margin-top: 5px;
+}
+/* line 156, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlords .landlord .thumbnail h5,
+.left-sidebar-active .landlords .landlord .thumbnail .box {
+  display: none;
+}
+/* line 160, ../sass/components/_landlords.sass */
+.left-sidebar-active .landlord-profile {
+  background: none;
+  padding-top: 5px;
 }
 
 /* line 1, ../sass/components/_map.sass */
@@ -383,105 +442,106 @@ html.landlords body > .row-fluid {
   border-color: #2b353f #2b353f #364350;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 112, ../sass/components/_map.sass */
-#map .popupWrapper .box {
+/* line 116, ../sass/components/_map.sass */
+#map .popupWrapper .imageWrapper img {
+  height: auto;
+  max-width: 100% !important;
+}
+/* line 120, ../sass/components/_map.sass */
+#map .popupWrapper .daysWrapper {
+  border-bottom: none;
+}
+/* line 123, ../sass/components/_map.sass */
+#map .popupWrapper .main {
+  clear: both;
+  max-width: 229px;
+  padding-top: 15px;
+}
+/* line 128, ../sass/components/_map.sass */
+#map .popupWrapper .main,
+#map .popupWrapper .main h2 {
+  color: #333333;
+}
+/* line 132, ../sass/components/_map.sass */
+#map .popupWrapper .main h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin-bottom: 0.3em;
+}
+/* line 137, ../sass/components/_map.sass */
+#map .popupWrapper .main div {
+  font-size: 13px;
+  margin-bottom: 0.2em;
+}
+/* line 141, ../sass/components/_map.sass */
+#map .popupWrapper .main .officer {
+  font-style: italic;
+}
+/* line 144, ../sass/components/_map.sass */
+#map .popupWrapper .main button {
+  right: 18px;
+  top: 116px;
+  position: absolute;
+}
+
+/* line 149, ../sass/components/_map.sass */
+.box {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   float: left;
   margin-left: 2%;
-  height: 85px;
+  height: 85px !important;
   overflow: hidden;
   width: 32%;
 }
-/* line 121, ../sass/components/_map.sass */
-#map .popupWrapper .box:first-child {
+/* line 158, ../sass/components/_map.sass */
+.box:first-child {
   margin-left: 0;
 }
-/* line 124, ../sass/components/_map.sass */
-#map .popupWrapper .box.dataItem {
+/* line 161, ../sass/components/_map.sass */
+.box.dataItem {
   border: 1px solid;
   padding-top: 15px;
   text-align: center;
 }
-/* line 129, ../sass/components/_map.sass */
-#map .popupWrapper .box.total {
+/* line 166, ../sass/components/_map.sass */
+.box.box-orange {
   background: #f1f1f1;
   border-color: #eaeaea;
 }
-/* line 133, ../sass/components/_map.sass */
-#map .popupWrapper .box.total .highlighted {
+/* line 170, ../sass/components/_map.sass */
+.box.box-orange .highlighted {
   color: #f59630;
 }
-/* line 136, ../sass/components/_map.sass */
-#map .popupWrapper .box.since {
+/* line 173, ../sass/components/_map.sass */
+.box.box-red {
   background: #ececec;
   border-color: #e5e5e5;
 }
-/* line 140, ../sass/components/_map.sass */
-#map .popupWrapper .box.since .highlighted {
+/* line 177, ../sass/components/_map.sass */
+.box.box-red .highlighted {
   color: #e02d33;
 }
-/* line 143, ../sass/components/_map.sass */
-#map .popupWrapper .dataTitle {
+/* line 180, ../sass/components/_map.sass */
+.box .dataTitle {
   color: #a5a5a5;
   display: block;
   font-style: italic;
   font-size: 0.7em;
   padding-top: 7px;
 }
-/* line 150, ../sass/components/_map.sass */
-#map .popupWrapper .dataValue {
+/* line 187, ../sass/components/_map.sass */
+.box .dataValue {
   font-weight: bold;
   font-size: 1.6em;
   line-height: 1em;
 }
-/* line 155, ../sass/components/_map.sass */
-#map .popupWrapper .dataValue i {
+/* line 192, ../sass/components/_map.sass */
+.box .dataValue i {
   font-size: 0.8em;
   line-height: 1.4em;
-}
-/* line 163, ../sass/components/_map.sass */
-#map .popupWrapper .imageWrapper img {
-  height: auto;
-  max-width: 100% !important;
-}
-/* line 167, ../sass/components/_map.sass */
-#map .popupWrapper .daysWrapper {
-  border-bottom: none;
-}
-/* line 170, ../sass/components/_map.sass */
-#map .popupWrapper .main {
-  clear: both;
-  max-width: 229px;
-  padding-top: 15px;
-}
-/* line 175, ../sass/components/_map.sass */
-#map .popupWrapper .main,
-#map .popupWrapper .main h2 {
-  color: #333333;
-}
-/* line 179, ../sass/components/_map.sass */
-#map .popupWrapper .main h2 {
-  font-size: 1.2em;
-  font-weight: normal;
-  margin-bottom: 0.3em;
-}
-/* line 184, ../sass/components/_map.sass */
-#map .popupWrapper .main div {
-  font-size: 13px;
-  margin-bottom: 0.2em;
-}
-/* line 188, ../sass/components/_map.sass */
-#map .popupWrapper .main .officer {
-  font-style: italic;
-}
-/* line 191, ../sass/components/_map.sass */
-#map .popupWrapper .main button {
-  right: 18px;
-  top: 116px;
-  position: absolute;
 }
 
 @media screen and (min-width: 620px) {

@@ -76,6 +76,7 @@ html.landlords
     cursor: pointer
     cursor: hand
     font-size: 80%
+    position: relative
 
     &:first-child
       //margin-left: 0
@@ -84,25 +85,78 @@ html.landlords
       background-color: $white
 
     h2
-      margin-top: 20px
+      margin-top: 10px
 
     h5,
-    h6
       margin: 0
 
+    .box-wrapper
+      bottom: 5px
+      position: absolute
+      width: 235px
+
+    .box
+      width: 45%
+      margin-left: 3%
+
+      .dataTitle
+        font-size: 1em
+        line-height: 1.2em
+
     .thumbnail
-      height: 350px
+      height: 355px
       width: 225px
 
       .headshot
-        width: 225px
-        height: 170px
-        background: $black url(/images/landlord.jpg) center no-repeat
+        position: relative
+        //width: 225px
+        //height: 170px
+        //background: $black url(/images/landlord.jpg) center no-repeat
 
         .rank
-          padding: 10px
+          position: absolute
+          top: 0
           color: $white
           font-size: 4em
           font-weight: bold
           text-align: right
 
+
+// landlord/* pages
+.left-sidebar-active 
+
+  .landlords
+    left: 400px 
+
+    .landlord-carousel-wrap
+      height: 200px
+
+    .rs-carousel-action-next,
+    .rs-carousel-action-prev
+      top: 75px
+
+    .landlord
+      
+      .thumbnail
+        width: 100px
+        height: 120px
+        
+        img
+          width: 100px
+          height: auto
+
+        h1
+          margin-left: 5px
+          line-height: 30px
+
+        h2
+          font-size: 1em
+          margin-top: 5px
+        
+        h5,
+        .box
+          display: none
+
+  .landlord-profile
+    background: none
+    padding-top: 5px

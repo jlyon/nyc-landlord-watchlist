@@ -5,10 +5,17 @@
 </template>
 
 <template name="results">
-  <div class="left-sidebar">
+  <div class="left-sidebar"> 
+
     <div id="results">
       {{#if ready}}
-        <h2 class="title">{{title}}</h2>
+        {{#if activeLandlord}}
+          {{#with landlord}}
+            {{> landlordProfile}}
+          {{/with}}
+        {{else}}hj
+          <h2 class="title">{{title}}</h2>
+        {{/if}}
         <div class="items-wrapper">
           {{#each data}}
             {{>buildingListItem}}
@@ -27,8 +34,8 @@
         <div class="box imageWrapper">
           <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="122" width="150" alt="Google StreetView Image @copy Google" />
         </div>
-        <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle"><!--Total -->Violations in {{units}} units</span></div>
-        <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-{{changeDirection}}"></i>{{change}}</span><span class="dataTitle">Since July 2012</span></div>
+        <div class="box box-orange dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle"><!--Total -->Violations in {{units}} units</span></div>
+        <div class="box box-red dataItem"><span class="dataValue highlighted"><i class="icon-arrow-{{changeDirection}}"></i>{{change}}</span><span class="dataTitle">Since July 2012</span></div>
       </div>
       <div class="main">
         <h2>{{street_address}}, <span>{{borough}}</span></h2>
