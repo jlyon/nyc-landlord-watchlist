@@ -1,10 +1,10 @@
 {
     "name": "leaflet-locatecontrol",
     "description": "A smart package that integrates with the leaflet-locatecontrol plugin for Leaflet.",
-    "homepage": "http://github.com/jlyon/meteor-leaflet-locatecontrol",
+    "homepage": "https://github.com/domoritz/leaflet-locatecontrol",
     "author": "Jeff Lyon",
     "version": "0.1.0",
-    "git": "https://github.com/jlyon/meteor-leaflet-locatecontrol.git",
+    "git": "https://github.com/domoritz/leaflet-locatecontrol.git",
     "packages": {}
 }
 
