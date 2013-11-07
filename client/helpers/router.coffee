@@ -32,6 +32,7 @@ Meteor.Router.add(
   '/buildings/:borough/:building': (borough, building) ->
     console.log borough
     openBuilding(borough, building)
+    Meteor.Router.to '/buildings/'+ borough +'/' + building + '/table'
 
   '/buildings/:borough/:building/:tab': (borough, building, tab) ->
     openBuilding(borough, building)

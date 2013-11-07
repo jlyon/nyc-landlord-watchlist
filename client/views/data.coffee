@@ -8,12 +8,18 @@ Template.data.helpers
   bldg: ->
     #console.log Session.get("activeBuilding")
     #console.log Buildings.find().fetch()
-    #console.log Buildings.findOne({bldg_id: Session.get("openBuilding")})
-    Buildings.findOne({bldg_id: Session.get("openBuilding")})
+    item = Buildings.findOne({bldg_id: parseInt(Session.get("openBuilding"))})
+    if item?
+      item.location = encodeURIComponent(item.street_address + " " + item.borough + ", NY " + item.zip)
+      item.change = item.num - item.previous
+    console.log item
+    item
+
+  activeTab: (tab) ->
+    if Session.get("openBuilding")? and Session.get("activeTab") is tab then return 'active' else return ''
 
   activeCategory: ->
-    activeTab = Session.get("activeTab")
-    if Session.get("openBuilding")? and (activeTab? or activeTab is "category") then return 'active' else return ''
+    if Session.get("openBuilding")? and Session.get("activeTab") is "category" then return 'active' else return ''
   activeTable: ->
     if Session.get("openBuilding")? and Session.get("activeTab") is "table" then return 'active' else return ''
   activeWordCloud: ->

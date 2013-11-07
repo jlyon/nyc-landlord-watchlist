@@ -118,45 +118,52 @@ Template.map.rendered = ->
 @updateMakers = (data) ->
   console.log "update"
   borough = Session.get "activeBorough"
-  clearMarkers()
 
-  _.each data, (item, index)->
+  if (
+    data.length and 
+    (borough is data[0].borough) or 
+    ((borough is `undefined` or borough is "all") and window.last isnt data.pop())
+  )
+    window.last = data.pop()
+    clearMarkers()
 
-    # add fields to item
-    item.size = Math.round(item.num/20) + 5;
-    item.rank = index + Session.get "pageStart" # @todo
-    latlng = itemLatlng(item)
+    _.each data, (item, index)->
 
-    # add markers
-    if latlng?
-      marker = L.marker(latlng,
-        icon: new L.divIcon(
-          className: 'circle-marker'
-          iconSize: [item.size, item.size]
-        )
-        title: item.org+', '+item.num+' outstanding requests'
-        name: item.org
-        index: index
-        opacity: .7
-        size: item.size
-        _id: item._id
-      ).on("click", (e) ->
-        item = Buildings.findOne({_id: e.target.options._id})
-        openPopup item
-        console.log 'clicked'
-        scroll $('#results'), $('#building-'+item._id)
-      ).addTo window.markerLayer
+      # add fields to item
+      item.size = Math.round(item.num/20) + 5;
+      item.rank = index + Session.get "pageStart" # @todo
+      latlng = itemLatlng(item)
 
-      $("body").addClass "left-sidebar-active"  
-  
-  # open the first popup (after a slight delay to allow item to be loaded in DOM)
-  if window.changed
-    window.setTimeout ->
-      openPopup data[0]
-      #Session.set "changed", false
-    , 50
-    window.changed = false
-    resizeMap()
+      # add markers
+      if latlng?
+        marker = L.marker(latlng,
+          icon: new L.divIcon(
+            className: 'circle-marker'
+            iconSize: [item.size, item.size]
+          )
+          title: item.org+', '+item.num+' outstanding requests'
+          name: item.org
+          index: index
+          opacity: .7
+          size: item.size
+          _id: item._id
+        ).on("click", (e) ->
+          item = Buildings.findOne({_id: e.target.options._id})
+          openPopup item
+          console.log 'clicked'
+          scroll $('#results'), $('#building-'+item._id)
+        ).addTo window.markerLayer
+
+        $("body").addClass "left-sidebar-active"  
+    
+    # open the first popup (after a slight delay to allow item to be loaded in DOM)
+    if window.changed
+      window.setTimeout ->
+        openPopup data[0]
+        #Session.set "changed", false
+      , 50
+      window.changed = false
+      resizeMap()
 
 
 @openPopup = (item) ->
@@ -204,5 +211,8 @@ Template.map.rendered = ->
 @showData = ->
   # @todo: logic for when /landlords is open
   if Session.get("activeBorough") then borough = Session.get("activeBorough") else borough = "all"
-  url = '/buildings/' + borough + '/' + Session.get("activeBuilding")
+  tag = Session.get 'activeTag'
+  tag = if tag? then tag else 'category'
+  console.log '/buildings/' + borough + '/' + Session.get("activeBuilding") + '/' + tag
+  url = '/buildings/' + borough + '/' + Session.get("activeBuilding") + '/' + tag
   Meteor.Router.to url

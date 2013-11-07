@@ -1,20 +1,22 @@
 <template name="data">
 
   <div class="data-header">
-    <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="125" width="200" alt="Google StreetView Image @copy Google" />
-    <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle"><!--Total -->Violations in {{units}} units</span></div>
-    <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-{{changeDirection}}"></i>{{change}}</span><span class="dataTitle">Since July 2012
-    <div class="main">
-      <h2>{{bldg.street_address}}, <span>{{borough}}</span></h2>
-      <div>{{org}}</div>
-      {{#if officer}}<div class="officer">{{officer}}, Head Officer</div>{{/if}}
-    </div>
+    {{#with bldg}}
+      <img src="http://maps.googleapis.com/maps/api/streetview?size=150x122&location={{location}}&sensor=false" height="125" width="200" alt="Google StreetView Image @copy Google" />
+      <div class="box total dataItem"><span class="dataValue highlighted">{{num}}</span><span class="dataTitle"><!--Total -->Violations in {{units}} units</span></div>
+      <div class="box since dataItem"><span class="dataValue highlighted"><i class="icon-arrow-{{changeDirection}}"></i>{{change}}</span><span class="dataTitle">Since July 2012
+      <div class="main">
+        <h2>{{street_address}}, <span>{{borough}}</span></h2>
+        <div>{{org}}</div>
+        {{#if officer}}<div class="officer">{{officer}}, Head Officer</div>{{/if}}
+      </div>
+    {{/with}}
   </div>
 
   <ul class="nav nav-tabs">
-    <li class="{{activeCategory}}"><a href="{{bldg_id}}/category">By Category</a></li>
-    <li class="{{activeTable}}"><a href="{{bldg_id}}/table">Data Table</a></li>
-    <li class="{{activeCloud}}"><a href="{{bldg_id}}/cloud">Word Cloud</a></li>
+    <li class="{{activeCategory}}"><a href="category">By Category</a></li>
+    <li class="{{activeTable}}"><a href="table">Data Table</a></li>
+    <li class="{{activeCloud}}"><a href="cloud">Word Cloud</a></li>
   </ul>
   <div class="data-content">
     {{#if activeCategory}} {{>dataCategory}} {{/if}}
