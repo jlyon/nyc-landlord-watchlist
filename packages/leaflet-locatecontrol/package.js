@@ -3,6 +3,6 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-  api.add_files('leaflet-locatecontrol/src/L.Control.Locate.js', 'client');
-  api.add_files('leaflet-locatecontrol/src/L.Control.Locate.css', 'client');
+  api.add_files('leaflet-locate-control/src/L.Control.Locate.js', 'client');
+  api.add_files('leaflet-locate-control/src/L.Control.Locate.css', 'client');
 });
